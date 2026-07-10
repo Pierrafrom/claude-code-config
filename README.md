@@ -22,7 +22,7 @@ useful, fork it, or use it as inspiration for your own.
 | `rules/data/` | Data/ML domain rules: SQL & dbt style (incl. project structure), database design (OLTP/Kimball/Data Vault), data engineering pipelines, MLOps/LLMOps/RAG, data science/MLOps project structure |
 | `rules/devops/` | CI/CD, Docker, GitOps/IaC, observability, DevSecOps |
 | `agents/` | Subagent definitions (build-error-resolver, code-reviewer, python-reviewer, tdd-guide) |
-| `skills/` | Custom slash-command skills (audit-docs, audit-quality, audit-security, init-project, lint-zero, pr-create, split-commit, sync-recap, write-docs, ...) |
+| `skills/` | Custom slash-command skills (audit-docs, audit-quality, audit-security, design-system, init-project, lint-zero, pr-create, split-commit, sync-recap, write-docs, ...) |
 | `hooks/hooks.json` | Session-start reminder + post-tool-use hook that nudges toward checking structured logs after a failed command |
 | `examples/` | Reference templates: `.pre-commit-config.yaml`, `pyproject.toml` (ruff + mypy strict config), `tsconfig.json`, `biome.json`, `eslint.config.js`, `Dockerfile`, `docker-compose.yml`, `.gitattributes`, `.gitignore`, `logging_config.py`, a GitHub Actions CI workflow |
 | `settings.example.json` | Sanitized example of `~/.claude/settings.json` (generic permissions only — see below) |
