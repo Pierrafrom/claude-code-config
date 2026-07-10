@@ -1,0 +1,43 @@
+{
+  "env": {
+    "MAX_THINKING_TOKENS": "10000",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "haiku"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(pytest *)",
+      "Bash(uv add:*)",
+      "Bash(uv sync:*)",
+      "Bash(uv run mypy:*)",
+      "Bash(uv run ruff check:*)",
+      "Bash(uv run ruff format:*)",
+      "Bash(uv run pytest:*)",
+      "Bash(uvx:*)",
+      "Bash(bun *)",
+      "Bash(npm run *)",
+      "mcp__github__create_pull_request",
+      "mcp__github__list_pull_requests",
+      "mcp__github__update_pull_request",
+      "mcp__codegraph__*"
+    ],
+    "ask": [
+      "Bash(rm *)",
+      "Bash(git push --force*)"
+    ]
+  },
+  "model": "sonnet",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "codegraph prompt-hook"
+          }
+        ]
+      }
+    ]
+  },
+  "tui": "fullscreen"
+}

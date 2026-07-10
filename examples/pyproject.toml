@@ -1,0 +1,67 @@
+[project]
+name = "my-project"
+version = "0.1.0"
+description = ""
+requires-python = ">=3.11"
+dependencies = []
+
+# Managed with uv: `uv sync` to install, `uv add <pkg>` / `uv add --dev <pkg>`
+# to add a dependency — never edit this list by hand and forget `uv.lock`.
+[dependency-groups]
+dev = ["ruff", "pytest", "pytest-cov", "mypy", "mdformat", "mdformat-gfm"]
+
+# ---- Ruff: lint + format + imports + modernization, a single tool ----
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E", "W",   # pycodestyle
+    "F",        # pyflakes (dead code, unused imports)
+    "I",        # isort (import sorting)
+    "N",        # pep8-naming
+    "UP",       # pyupgrade (modern syntax)
+    "B",        # bugbear (common bugs)
+    "SIM",      # simplify
+    "C90",      # cyclomatic complexity
+    "ARG",      # unused arguments
+    "RET",      # return consistency
+    "PTH",      # pathlib rather than os.path
+    "LOG",      # logging module best practices
+    "D",        # pydocstyle (docstring presence + format, see rules/common/documentation.md)
+    "TID",      # tidy-imports (bans relative imports)
+    "ANN",      # flake8-annotations (missing type hints, pairs with mypy --strict)
+]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "ANN"]  # test names are descriptive (test_<behavior>_<condition>), no docstring/annotation required
+"__init__.py" = ["D104"]  # package docstring optional for thin __init__ files
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# ---- Pytest ----
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --cov=src --cov-report=term-missing --cov-fail-under=80"
+
+# ---- Mypy (mandatory strict baseline, see rules/python/typing-strict.md) ----
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_ignores = true
+warn_unused_configs = true
+ignore_missing_imports = true

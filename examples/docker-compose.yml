@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs   # logs accessible from the host for Claude to debug without entering the container
+    environment:
+      - LOG_LEVEL=INFO

@@ -1,0 +1,25 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[Reminder] Strict TDD + zero-warning lint + JSONL logs before rereading code. Shell: detect via $FISH_VERSION/$PSVersionTable before a one-off command, never bash for that. Check git diff before commit.' >&2"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "tool == \"Bash\" && tool_output.exit_code != 0",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -d logs ]; then echo '[Reminder] A command failed — check logs/*.jsonl (grep level:ERROR) before rereading the entire codebase.' >&2; fi"
+          }
+        ]
+      }
+    ]
+  }
+}
