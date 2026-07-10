@@ -58,6 +58,11 @@ per-language instantiation.
    `rules/typescript/lint-strict.md`. A config is a snapshot of "current
    best practice as of generation time," not a permanent truth — flag it
    as such rather than presenting it as settled forever.
+8. **Before relying on one of this config's own time-sensitive rules**
+   (not just when generating a fresh config), see
+   `rules/common/rule-freshness.md` for the check-before-applying
+   procedure: flag the specific rule, ask before verifying online, update
+   the file itself if it changed.
 
 ## Why this matters more for Claude than for a human author
 
