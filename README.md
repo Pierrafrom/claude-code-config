@@ -116,4 +116,5 @@ this repo.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+[Unlicense](https://unlicense.org) — public domain dedication, no
+conditions, no attribution required. See [LICENSE](LICENSE).
