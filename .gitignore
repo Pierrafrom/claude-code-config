@@ -2,3 +2,9 @@
 *.pyc
 __pycache__/
 .codegraph/
+
+# third-party skills installed via `npx skills add` — symlinks to
+# ~/.agents/skills/, machine-local, not this repo's own content
+skills/vercel-react-best-practices
+skills/vercel-composition-patterns
+skills/web-design-guidelines
