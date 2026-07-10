@@ -47,6 +47,7 @@ Domain-specific rule files (load by project context — routing logic is in each
 - DevOps (CI/CD, Docker, GitOps/IaC, observability, DevSecOps) → `rules/devops/devops.md`
 - TypeScript/JavaScript typing, lint, patterns, architecture → `rules/typescript/*`
 - Which frontend design skill/plugin to use, by surface type → `rules/frontend/design-skill-routing.md`
+- Project directory structure by stack (Next.js, Turborepo, FastAPI, data science/MLOps, dbt) → `rules/common/project-architectures.md` (these are patterns to converge toward, not mandates — read the governing-rule note there before applying one rigidly)
 
 - **Strict clean code**: short functions/single responsibility, zero dead code, zero duplication, explicit naming without relying on comments — split into sub-functions only when each has an autonomous, reusable meaning, not by dogmatic line-count (see the Ousterhout nuance in `rules/common/coding-style.md`)
 - **Strict typing by default, in any language that supports it**: strictest checker setting available (Python baseline: `mypy --strict`, detail in `rules/python/typing-strict.md`), type hints mandatory on public signatures, types chosen to maximize readability rather than just satisfy the checker. Language-agnostic principle in `rules/common/coding-style.md`.

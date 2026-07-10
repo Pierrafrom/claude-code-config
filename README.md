@@ -15,11 +15,11 @@ useful, fork it, or use it as inspiration for your own.
 | Path | Purpose |
 |---|---|
 | `CLAUDE.md` | Global context loaded into every session: stack, response style, shell-detection rules, token/context management, permanent guardrails |
-| `rules/common/` | Language-agnostic rules: clean code, OOP design, documentation discipline, logging format, repo structure, shell detection (Fish/PowerShell), config-generation standards (always extend an official baseline) |
-| `rules/python/` | Python-specific: lint (ruff strict), typing (`mypy --strict` baseline), OOP idioms |
+| `rules/common/` | Language-agnostic rules: clean code, OOP design, documentation discipline, logging format, repo structure, shell detection (Fish/PowerShell), config-generation standards (always extend an official baseline), project-architecture directory trees by stack |
+| `rules/python/` | Python-specific: lint (ruff strict), typing (`mypy --strict` baseline), OOP idioms, FastAPI project structure (3 complexity levels) |
 | `rules/typescript/` | TypeScript/JS-specific: lint (Biome/ESLint), typing (`tsc --strict` baseline + advanced typing), modern JS idioms, architecture/error-handling patterns |
-| `rules/frontend/` | Routing logic between the installed frontend design skills/plugins (which one to use for marketing vs product UI, always-on vs punctual) |
-| `rules/data/` | Data/ML domain rules: SQL & dbt style, database design (OLTP/Kimball/Data Vault), data engineering pipelines, MLOps/LLMOps/RAG |
+| `rules/frontend/` | Routing logic between the installed frontend design skills/plugins, plus Next.js App Router and Turborepo monorepo project structures |
+| `rules/data/` | Data/ML domain rules: SQL & dbt style (incl. project structure), database design (OLTP/Kimball/Data Vault), data engineering pipelines, MLOps/LLMOps/RAG, data science/MLOps project structure |
 | `rules/devops/` | CI/CD, Docker, GitOps/IaC, observability, DevSecOps |
 | `agents/` | Subagent definitions (build-error-resolver, code-reviewer, python-reviewer, tdd-guide) |
 | `skills/` | Custom slash-command skills (audit-docs, audit-quality, audit-security, init-project, lint-zero, pr-create, split-commit, sync-recap, write-docs, ...) |

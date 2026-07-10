@@ -20,6 +20,60 @@
 - Staging models are the only layer that references `source()` — downstream layers (intermediate, marts) only use `ref()`. A model must not mix `source()` and `ref()` in the same file.
 - Staging layer is rename/recast only: standardize column names (all timestamps as `<event>_at` in UTC, prices as decimal amounts), recast types — no aggregations, no filters, no business logic.
 - Table prefixes: `stg_` for staging, `fct_` for facts, `dim_` for dimensions, `int_` for intermediate.
+- Full naming convention: `stg_<source>__<entity>` for staging (double underscore separates source from entity), `int_<description>` for intermediate, `fct_<event>` / `dim_<entity>` for marts.
+
+## Project structure
+
+See `rules/common/project-architectures.md` for the governing rule (a
+pattern to converge toward, not a mandate). Source:
+docs.getdbt.com/best-practices/how-we-structure — dbt's own documented
+convention for the three-layer split.
+
+```
+my-dbt-project/
+├── models/
+│   ├── staging/                   # Layer 1 — clean raw sources
+│   │   ├── salesforce/
+│   │   │   ├── _salesforce__sources.yml   # Source definition
+│   │   │   ├── _salesforce__models.yml    # Model documentation
+│   │   │   ├── stg_salesforce__contacts.sql
+│   │   │   └── stg_salesforce__accounts.sql
+│   │   └── stripe/
+│   │       ├── _stripe__sources.yml
+│   │       ├── stg_stripe__payments.sql
+│   │       └── stg_stripe__subscriptions.sql
+│   │
+│   ├── intermediate/              # Layer 2 — transforms between staging and marts
+│   │   ├── finance/int_payments_pivoted.sql
+│   │   └── marketing/int_customer_lifetime_value.sql
+│   │
+│   └── marts/                     # Layer 3 — consumable by analysts
+│       ├── finance/
+│       │   ├── _finance__models.yml
+│       │   ├── fct_orders.sql
+│       │   └── dim_customers.sql
+│       └── marketing/
+│           ├── fct_campaigns.sql
+│           └── dim_segments.sql
+│
+├── macros/                        # Reusable Jinja macros
+│   ├── generate_schema_name.sql
+│   └── cents_to_dollars.sql
+│
+├── tests/                         # Custom tests, beyond the generic built-ins
+│   └── assert_positive_revenue.sql
+│
+├── seeds/                         # Static CSVs versioned in Git
+│   └── country_codes.csv
+│
+├── analyses/                      # Ad-hoc queries, not models
+├── snapshots/                     # SCD Type 2 via dbt snapshot
+│
+├── dbt_project.yml                # Main config
+├── profiles.yml                   # Connections — never committed (.gitignore)
+├── packages.yml                   # dbt dependencies (dbt-utils, dbt-audit-helper)
+└── .sqlfluff                      # SQLFluff config
+```
 
 **Tests and quality:**
 - Every model must have at minimum a primary key tested for `unique` and `not_null`.
