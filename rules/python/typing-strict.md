@@ -3,20 +3,30 @@
 Typing is a design tool, not decoration (see "Strict typing as an OOP
 discipline" in `rules/python/oop-idioms.md`). This file is the mechanical
 baseline: what `mypy` config to use, which syntax is mandatory, and how to
-handle the cases that resist typing cleanly.
+handle the cases that resist typing cleanly. See
+`rules/common/config-standards.md` for the general "extend `strict`,
+don't hand-pick flags" principle this file follows.
 
 ## Baseline: mypy strict, not optional
 
 `mypy --strict` (via `[tool.mypy] strict = true` in `pyproject.toml`) is
 the default for every Python project, not a "nice to have for big
-modules". Minimal config (see `examples-perso/pyproject.toml`):
+modules". Minimal config (see `examples/pyproject.toml`):
 
 ```toml
+# Base: mypy.readthedocs.io/en/stable/config_file.html — extend strict,
+# don't hand-pick individual flags.
 [tool.mypy]
 python_version = "3.11"
 strict = true
 warn_return_any = true
 warn_unused_ignores = true
+ignore_missing_imports = true
+
+# Per-module override for third-party libs with no stubs, instead of
+# loosening ignore_missing_imports project-wide beyond what's needed:
+[[tool.mypy.overrides]]
+module = ["some_untyped_lib.*"]
 ignore_missing_imports = true
 ```
 

@@ -14,10 +14,32 @@ uv add --dev ruff
 
 (see `rules/python/python-patterns.md` for the general uv/dependency-isolation rule — never a bare `pip install` inside a project)
 
-Config in `pyproject.toml` (see the `examples-perso/pyproject.toml` provided with this config) —
+Config in `pyproject.toml` (see the `examples/pyproject.toml` provided with this config) —
 never a separate `.flake8`/`setup.cfg`.
 
-## Enabled rules (strict level, not the permissive default)
+## Enabled rules — extend Ruff's baseline, don't replace it
+
+See `rules/common/config-standards.md` for the general principle. Ruff's
+own default (`E4`, `E7`, `E9`, `F`) only covers pyflakes and the most
+critical pycodestyle errors — for a serious project, add categories with
+`extend-select` so the default baseline stays intact underneath:
+
+```toml
+# pyproject.toml
+# Base: docs.astral.sh/ruff/rules/ — extend-select, never `select` from scratch
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+extend-select = [
+  "E", "W", "F", "I", "N", "UP", "B", "SIM", "C90", "ARG", "RET", "PTH",
+  "LOG", "D", "TID", "ANN",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S", "ARG"]  # relax as needed, never globally
+```
 
 Minimum enabled ruff categories:
 - `E`, `W` — pycodestyle (PEP8 style, including `E711`/`E712` forcing `is`/`is not` against `None`/`True`/`False` rather than `==`)
@@ -79,6 +101,19 @@ non-trivial.
 - A strict-mode mypy error is treated exactly like a ruff warning: fix it,
   never suppress it without the documented `# type: ignore[<code>]`
   justification described in `rules/python/typing-strict.md`.
+
+## Sources to watch (best-practice drift)
+
+| Domain | Canonical source | Change signal |
+|---|---|---|
+| Ruff rules | docs.astral.sh/ruff/rules/ | Changelog: github.com/astral-sh/ruff |
+| Ruff configuration | docs.astral.sh/ruff/configuration/ | Same changelog |
+| mypy options | mypy.readthedocs.io/en/stable/config_file.html | mypy changelog |
+| Python style (PEPs) | peps.python.org | Newly accepted PEPs |
+
+A config generated today is a snapshot of current best practice, not a
+permanent truth — re-check the relevant source above before assuming an
+older config is still idiomatic.
 
 ## Pre-commit — always present, not optional
 

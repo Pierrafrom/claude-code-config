@@ -15,6 +15,12 @@ software engineering.
   template here, apply the same principles using that ecosystem's own
   standard equivalent tools rather than forcing Python tooling onto it.
 - Python: data, ML, dashboards (Polars, pandas, LangChain, dbt/Snowflake)
+- Frontend/web: TypeScript-first React/Next.js, shadcn/ui as the default
+  component library. Detail in `rules/typescript/*` (typing, lint,
+  patterns, architecture) and `rules/frontend/design-skill-routing.md`
+  (which installed design skill/plugin to reach for, by surface type —
+  marketing/landing vs product/dashboard, see that file before starting
+  any UI work).
 - **Dependency isolation is mandatory, for any language**: project
   dependencies always live in an isolated environment, never installed
   into a global/system interpreter. Concrete instantiation for Python
@@ -29,8 +35,9 @@ software engineering.
 
 See full detail in `rules/common/coding-style.md`, `rules/common/logging.md`,
 `rules/common/documentation.md`, `rules/common/oop-design.md`,
-`rules/python/lint-strict.md`, `rules/python/oop-idioms.md`,
-`rules/python/typing-strict.md`. Summary of non-negotiable pillars:
+`rules/common/config-standards.md`, `rules/python/lint-strict.md`,
+`rules/python/oop-idioms.md`, `rules/python/typing-strict.md`. Summary of
+non-negotiable pillars:
 
 Domain-specific rule files (load by project context — routing logic is in each file):
 - SQL / dbt / data warehouse style → `rules/data/sql-dbt.md`
@@ -38,13 +45,16 @@ Domain-specific rule files (load by project context — routing logic is in each
 - Database design (OLTP/3NF, Kimball/star schema, Data Vault, SCD) → `rules/data/db-design.md`
 - MLOps / LLMOps / RAG pipelines → `rules/data/mlops-rag.md`
 - DevOps (CI/CD, Docker, GitOps/IaC, observability, DevSecOps) → `rules/devops/devops.md`
+- TypeScript/JavaScript typing, lint, patterns, architecture → `rules/typescript/*`
+- Which frontend design skill/plugin to use, by surface type → `rules/frontend/design-skill-routing.md`
 
 - **Strict clean code**: short functions/single responsibility, zero dead code, zero duplication, explicit naming without relying on comments — split into sub-functions only when each has an autonomous, reusable meaning, not by dogmatic line-count (see the Ousterhout nuance in `rules/common/coding-style.md`)
 - **Strict typing by default, in any language that supports it**: strictest checker setting available (Python baseline: `mypy --strict`, detail in `rules/python/typing-strict.md`), type hints mandatory on public signatures, types chosen to maximize readability rather than just satisfy the checker. Language-agnostic principle in `rules/common/coding-style.md`.
 - **All code in English, no exceptions**: names (variables, functions, classes, files, branches), comments, docstrings, commit messages, and all documentation (README, docs/*, project CLAUDE.md) — detail in `rules/common/coding-style.md`. Conversation stays in the user's language of choice unless a switch is explicitly requested.
 - **Favor object-oriented design by default**: SOLID (understood properly, not the shallow version), composition over inheritance, real encapsulation (Tell-Don't-Ask, invariants), Law of Demeter, Design by Contract, Value Objects vs Entities — avoid God Objects and Anemic Domain Models. Recognized design patterns are welcome, not just tolerated — they're a shared vocabulary. Language-agnostic detail in `rules/common/oop-design.md`, Python instantiation in `rules/python/oop-idioms.md`.
 - **Systematic TDD**: test before code, 80%+ coverage on business logic
-- **Zero-warning lint**: `ruff check .` must be clean before any commit, not just zero errors
+- **Zero-warning lint**: `ruff check .` (Python) / `biome check .` or `eslint .` (TS/JS) must be clean before any commit, not just zero errors
+- **Generated configs always extend an official standard baseline, never written from scratch** — see `rules/common/config-standards.md`. Every generated lint/type/format config cites its source and, where relevant, flags instability under semver, so it stays checkable against drift instead of going stale silently.
 - **Documentation written incrementally, by default, exactly like TDD**: not a separate pass done later or only when asked — every time a feature is implemented or existing code is changed, the docs describing it (docstrings, README, `docs/*`) are written or updated in the same pass, automatically, without being asked. Organized in a coherent `docs/` tree following community conventions, complete Google-style docstrings in English across the codebase, and structured so an AI assistant reading the repo gets the full project context, not half of it. Use the `write-docs` skill for this and `audit-docs` to check for gaps — detail in `rules/common/documentation.md`
 - **Up-to-date docs required**: check via Context7 (MCP) before using an unfamiliar or fast-evolving lib/API — never rely solely on training memory for this
 - **Structured JSONL logging**: see `rules/common/logging.md` — designed so AI-assisted debugging is fast and cheap in tokens
