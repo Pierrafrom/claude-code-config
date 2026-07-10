@@ -6,6 +6,10 @@ JS/TS instantiation, mirroring `rules/python/lint-strict.md`.
 
 ## Tool choice — Biome vs ESLint + Prettier
 
+Biome and ESLint are genuine competitors on the same ground (lint +
+format) — the rule below is which ONE leads a given project, not both
+running in parallel as a full duplicate setup.
+
 - **Biome**: lint + format in a single tool, sub-500ms on ~300 files, no
   separate formatter needed. Default choice for a new TypeScript project
   with no strong dependency on the ESLint plugin ecosystem.
@@ -17,6 +21,44 @@ JS/TS instantiation, mirroring `rules/python/lint-strict.md`.
   → Biome covers it with no gap. React project, or anything needing
   type-aware linting → ESLint + `typescript-eslint` for those specific
   rules, Biome or Prettier for formatting either way.
+
+### Current gap (check this periodically, it's actively closing)
+
+As of mid-2026: Biome has type-aware linting, but not the deepest
+cross-file generic resolution the full TypeScript language service does;
+and Biome's rules-of-hooks coverage doesn't yet match the full
+`eslint-plugin-react-hooks` v6/v7 rule set. For a React project, ESLint
+is still the safer default for those two rule families specifically.
+
+### Hybrid pattern — Biome as the primary tool, ESLint as a thin add-on
+
+Rather than a full duplicate ESLint setup, keep Biome as the primary
+lint+format tool and load ESLint only for the specific rule families
+Biome doesn't cover yet:
+
+```js
+// eslint.config.js
+// Thin ESLint layer on top of Biome — NOT a full duplicate setup.
+// Biome (biome.json) stays the primary lint+format tool; this file only
+// loads the rule families Biome doesn't fully cover yet (mid-2026):
+// eslint-plugin-react-hooks and deep type-aware @typescript-eslint rules.
+// Re-check rules/typescript/lint-strict.md's "current gap" note before
+// assuming this is still needed — Biome is actively closing it.
+import tseslint from "typescript-eslint";
+import reactHooks from "eslint-plugin-react-hooks";
+
+export default tseslint.config({
+  plugins: { "react-hooks": reactHooks },
+  rules: {
+    ...reactHooks.configs.recommended.rules,
+    "@typescript-eslint/no-floating-promises": "error",
+  },
+});
+```
+
+Run Biome for everything else (formatting, general lint, import
+organization); this ESLint config exists solely to fill the two known
+gaps, not to re-implement what Biome already does.
 
 ## Biome config — extend `biome:recommended`
 
