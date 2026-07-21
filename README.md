@@ -15,7 +15,7 @@ useful, fork it, or use it as inspiration for your own.
 | Path | Purpose |
 |---|---|
 | `CLAUDE.md` | Global context loaded into every session: stack, response style, shell-detection rules, token/context management, permanent guardrails |
-| `rules/common/` | Language-agnostic rules: clean code, OOP design, documentation discipline, logging format, repo structure, shell detection (Fish/PowerShell), config-generation standards (always extend an official baseline), project-architecture directory trees by stack, rule-freshness check (flag and offer to update this config's own time-sensitive rules) |
+| `rules/common/` | Language-agnostic rules: clean code, OOP design, documentation discipline, logging format, repo structure, shell detection (Fish/PowerShell), config-generation standards (always extend an official baseline), project-architecture directory trees by stack, rule-freshness check (flag and offer to update this config's own time-sensitive rules), reasoning/planning tool routing (sequential-thinking vs plan mode vs the `Plan` subagent) |
 | `rules/python/` | Python-specific: lint (ruff strict), typing (`mypy --strict` baseline), OOP idioms, FastAPI project structure (3 complexity levels) |
 | `rules/typescript/` | TypeScript/JS-specific: lint (Biome/ESLint), typing (`tsc --strict` baseline + advanced typing), modern JS idioms, architecture/error-handling patterns |
 | `rules/frontend/` | Routing logic between the installed frontend design skills/plugins, plus Next.js App Router and Turborepo monorepo project structures |

@@ -98,6 +98,14 @@ read the source code once the logs have pinpointed the problem area.
   files, comparing architecture options, planning a non-trivial refactor.
   Do not invoke it for simple tasks (fixing an import, editing one line):
   normal internal reasoning is enough.
+- **Sequential-thinking vs plan mode vs the `Plan` subagent**: these three
+  overlap on "this needs real thinking before acting" — see
+  `rules/common/reasoning-planning-routing.md` for the routing rule. Short
+  version: plan mode is the default for any non-trivial implementation task
+  (free, same context); sequential-thinking is an inline aid used inside
+  whichever workflow is already running, not a competing one; the `Plan`
+  subagent is reserved for when the user explicitly wants delegation itself
+  (isolated/parallel/background planning), same bar as any other subagent.
 - **CodeGraph (MCP)**: see the dedicated `## CodeGraph` section below for
   when and how to use it.
 - **Caveman style**: reply telegraphically on mechanical tasks and
