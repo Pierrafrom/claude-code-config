@@ -60,22 +60,43 @@ Run Biome for everything else (formatting, general lint, import
 organization); this ESLint config exists solely to fill the two known
 gaps, not to re-implement what Biome already does.
 
-## Biome config — extend `biome:recommended`
+## Biome config — extend the `recommended` preset
+
+Biome 2.x changed the config format from 1.x — `extends: ["biome:recommended"]`
+no longer resolves (`Could not resolve biome:recommended: module not
+found`). The current mechanism is `linter.rules.preset: "recommended"`,
+and `organizeImports` moved under `assist.actions.source`. Generate the
+baseline with `npx biome init` against the actually-installed version
+rather than hand-writing it — the schema URL is version-pinned
+(`schemas/<installed-version>/schema.json`) and drifts on every Biome
+release, so a copy-pasted example goes stale fast. Below is the shape
+confirmed against Biome 2.5.3 (2026-07-16); re-verify against a fresh
+`biome init` output before trusting an older copy of this file.
 
 ```jsonc
 // biome.json
-// Base: biomejs.dev/reference/configuration/ — extends biome:recommended
+// Base: generate with `npx biome init`, then layer these overrides in —
+// don't hand-write from scratch. biomejs.dev/reference/configuration/
 {
-  "$schema": "https://biomejs.dev/schemas/1.x/schema.json",
-  "extends": ["biome:recommended"],
+  "$schema": "https://biomejs.dev/schemas/2.5.3/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": false
+  },
   "formatter": {
-    "lineWidth": 100,
+    "enabled": true,
     "indentStyle": "space",
-    "indentWidth": 2
+    "indentWidth": 2,
+    "lineWidth": 100
   },
   "linter": {
+    "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "suspicious": {
         "noExplicitAny": "warn"
       },
@@ -84,7 +105,39 @@ gaps, not to re-implement what Biome already does.
       }
     }
   },
-  "organizeImports": { "enabled": true }
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double"
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  }
+}
+```
+
+**Known rule conflict**: Biome's `complexity/useLiteralKeys` (wants
+`obj.key` dot notation) structurally conflicts with TypeScript's
+`noPropertyAccessFromIndexSignature` (see the strict `tsconfig.json`
+baseline below), which *requires* bracket notation — `obj["key"]` — for
+any value typed via an index signature (`process.env`, CSS Modules
+imports, etc.). This isn't a one-off; it recurs for any project using
+either. Resolve by disabling the Biome rule in favor of the TypeScript
+flag, since the strict-typing baseline is the more foundational,
+deliberately-adopted convention:
+
+```jsonc
+"linter": {
+  "rules": {
+    "complexity": {
+      "useLiteralKeys": "off"
+    }
+  }
 }
 ```
 
