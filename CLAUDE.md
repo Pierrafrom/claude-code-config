@@ -21,6 +21,11 @@ software engineering.
   (which installed design skill/plugin to reach for, by surface type —
   marketing/landing vs product/dashboard, see that file before starting
   any UI work).
+- C/C++: coursework and personal systems/application projects, not
+  safety-critical by default (see `rules/cpp/c-patterns.md`'s routing
+  note if that ever changes). Detail in `rules/cpp/*` (C and C++ idioms
+  are separate files — the languages diverge too much to share one; lint,
+  build/CMake/vcpkg tooling are shared).
 - **Dependency isolation is mandatory, for any language**: project
   dependencies always live in an isolated environment, never installed
   into a global/system interpreter. Concrete instantiation for Python
@@ -46,6 +51,7 @@ Domain-specific rule files (load by project context — routing logic is in each
 - MLOps / LLMOps / RAG pipelines → `rules/data/mlops-rag.md`
 - DevOps (CI/CD, Docker, GitOps/IaC, observability, DevSecOps) → `rules/devops/devops.md`
 - TypeScript/JavaScript typing, lint, patterns, architecture → `rules/typescript/*`
+- C/C++ idioms, lint (clang-format/clang-tidy/cppcheck), build (CMake/vcpkg) → `rules/cpp/*`
 - Which frontend design skill/plugin to use, by surface type → `rules/frontend/design-skill-routing.md`
 - Project directory structure by stack (Next.js, Turborepo, FastAPI, data science/MLOps, dbt) → `rules/common/project-architectures.md` (these are patterns to converge toward, not mandates — read the governing-rule note there before applying one rigidly)
 

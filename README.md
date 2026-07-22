@@ -18,13 +18,14 @@ useful, fork it, or use it as inspiration for your own.
 | `rules/common/` | Language-agnostic rules: clean code, OOP design, documentation discipline, logging format, repo structure, shell detection (Fish/PowerShell), config-generation standards (always extend an official baseline), project-architecture directory trees by stack, rule-freshness check (flag and offer to update this config's own time-sensitive rules), reasoning/planning tool routing (sequential-thinking vs plan mode vs the `Plan` subagent) |
 | `rules/python/` | Python-specific: lint (ruff strict), typing (`mypy --strict` baseline), OOP idioms, FastAPI project structure (3 complexity levels) |
 | `rules/typescript/` | TypeScript/JS-specific: lint (Biome/ESLint), typing (`tsc --strict` baseline + advanced typing), modern JS idioms, architecture/error-handling patterns |
+| `rules/cpp/` | C/C++-specific: separate C and C++ idiom files (RAII/smart pointers/error handling for C++, memory discipline/C-specific patterns for C), shared lint (clang-format/clang-tidy/cppcheck) and build (CMake/vcpkg/sanitizers) tooling, advanced/architectural C++ patterns (PIMPL, Type Erasure, CRTP, concurrency) |
 | `rules/frontend/` | Routing logic between the installed frontend design skills/plugins, plus Next.js App Router and Turborepo monorepo project structures |
 | `rules/data/` | Data/ML domain rules: SQL & dbt style (incl. project structure), database design (OLTP/Kimball/Data Vault), data engineering pipelines, MLOps/LLMOps/RAG, data science/MLOps project structure |
 | `rules/devops/` | CI/CD, Docker, GitOps/IaC, observability, DevSecOps |
-| `agents/` | Subagent definitions (build-error-resolver, code-reviewer, python-reviewer, tdd-guide) |
+| `agents/` | Subagent definitions (build-error-resolver, code-reviewer, python-reviewer, cpp-reviewer, tdd-guide) |
 | `skills/` | Custom slash-command skills (audit-docs, audit-quality, audit-security, design-system, init-project, lint-zero, pr-create, split-commit, sync-recap, write-docs, ...) |
 | `hooks/hooks.json` | Session-start reminder + post-tool-use hook that nudges toward checking structured logs after a failed command |
-| `examples/` | Reference templates: `.pre-commit-config.yaml`, `pyproject.toml` (ruff + mypy strict config), `tsconfig.json`, `biome.json`, `eslint.config.js`, `Dockerfile`, `docker-compose.yml`, `.gitattributes`, `.gitignore`, `logging_config.py`, a GitHub Actions CI workflow |
+| `examples/` | Reference templates: `.pre-commit-config.yaml`, `pyproject.toml` (ruff + mypy strict config), `tsconfig.json`, `biome.json`, `eslint.config.js`, `Dockerfile`, `docker-compose.yml`, `.gitattributes`, `.gitignore`, `logging_config.py`, a GitHub Actions CI workflow, `.clang-format`, `.clang-tidy`, `CMakeLists.txt`, `CMakePresets.json`, `vcpkg.json` |
 | `settings.example.json` | Sanitized example of `~/.claude/settings.json` (generic permissions only — see below) |
 
 ## What's deliberately excluded

@@ -1,0 +1,17 @@
+# Base: clang.llvm.org/docs/ClangFormatStyleOptions.html — BasedOnStyle: Google
+# Re-check before trusting on a clang-format major version bump.
+# See rules/cpp/lint-strict.md for the rationale behind each override.
+BasedOnStyle: Google
+ColumnLimit: 100
+IndentWidth: 4
+AccessModifierOffset: -2
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^<(gtest|gmock)/'
+    Priority: 5
+  - Regex: '^<[a-z_]+\.h>'        # C standard library
+    Priority: 1
+  - Regex: '^<'                    # other system/third-party headers
+    Priority: 2
+  - Regex: '^"'                    # project headers
+    Priority: 3

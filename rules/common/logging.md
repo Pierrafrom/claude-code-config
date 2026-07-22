@@ -36,6 +36,30 @@ Optional field: `trace_id` if several steps of the same pipeline need to be corr
 - Default level: `INFO` in dev, configurable via an environment variable (`LOG_LEVEL`).
 - Output: a file in `logs/<name>.jsonl` (gitignored) AND stdout in dev for immediate visibility.
 
+## C/C++ setup (`spdlog` + JSON pattern)
+
+- `spdlog` is the default choice — header-only or compiled, async-capable,
+  no heavy dependency for what's needed here. Add it via the project's
+  `vcpkg.json` manifest (see `rules/cpp/build-architecture.md`), never a
+  system package.
+- Configure a JSON-shaped pattern on the sink so output matches this
+  file's fixed field order without a custom formatter:
+  ```cpp
+  spdlog::set_pattern(
+      R"({"ts":"%Y-%m-%dT%H:%M:%S%z","level":"%^%l%$","module":"%n","msg":"%v"})"
+  );
+  ```
+  `ctx` (structured key/value context) doesn't fit a static pattern string
+  — recent `spdlog` versions support structured key-value logging via a
+  named `kv` argument and a `{kv}` pattern placeholder; on an older
+  `spdlog` version, build the `ctx` object with `nlohmann::json` and pass
+  it as part of `%v` instead of extending the pattern.
+- One logger per module (`spdlog::stdout_logger_mt("module.name")` or a
+  file sink), not a single global default logger reused everywhere with
+  no `module` distinction.
+- Output: a file sink at `logs/<name>.jsonl` (gitignored, same convention
+  as Python) plus a stdout sink in dev builds.
+
 ## What to log (and what NOT to log)
 
 **Always log:**
