@@ -6,7 +6,11 @@ software engineering.
 
 ## Stack & environment
 
-- OS: WSL2 Ubuntu, Fish shell, Rust CLI tools (eza, bat, yazi, fastfetch)
+- OS: WSL2 Ubuntu, Fish shell, a modern CLI toolset (eza, bat, fd, ripgrep,
+  dust, duf, procs, btop, delta, xh, zoxide, tldr, superfile, fastfetch,
+  deep `fzf` integration) — prefer these over their legacy equivalents when
+  suggesting a command for this machine specifically, detail and full
+  legacy→modern table in `rules/common/modern-cli-tools.md`
 - **Main stack: Python + shell + Docker.** This is where the config has
   detailed tooling and templates (ruff, pytest, mdformat, pydocstyle,
   `examples/`). The general rules (clean code, TDD, zero-warning lint,
@@ -54,6 +58,7 @@ Domain-specific rule files (load by project context — routing logic is in each
 - C/C++ idioms, lint (clang-format/clang-tidy/cppcheck), build (CMake/vcpkg) → `rules/cpp/*`
 - Which frontend design skill/plugin to use, by surface type → `rules/frontend/design-skill-routing.md`
 - Project directory structure by stack (Next.js, Turborepo, FastAPI, data science/MLOps, dbt) → `rules/common/project-architectures.md` (these are patterns to converge toward, not mandates — read the governing-rule note there before applying one rigidly)
+- Modern CLI toolset installed on this machine (legacy→modern command table, fzf widgets, maintenance functions) → `rules/common/modern-cli-tools.md`
 
 - **Strict clean code**: short functions/single responsibility, zero dead code, zero duplication, explicit naming without relying on comments — split into sub-functions only when each has an autonomous, reusable meaning, not by dogmatic line-count (see the Ousterhout nuance in `rules/common/coding-style.md`)
 - **Strict typing by default, in any language that supports it**: strictest checker setting available (Python baseline: `mypy --strict`, detail in `rules/python/typing-strict.md`), type hints mandatory on public signatures, types chosen to maximize readability rather than just satisfy the checker. Language-agnostic principle in `rules/common/coding-style.md`.
@@ -140,4 +145,4 @@ In repositories indexed by CodeGraph (a `.codegraph/` directory exists at the re
 - **MCP tool** (when available): `codegraph_explore` answers most code questions in one call — the relevant symbols' verbatim source plus the call paths between them, including dynamic-dispatch hops grep can't follow. Name a file or symbol in the query to read its current line-numbered source.
 - **Shell** (always works): `codegraph explore "<symbol names or question>"` prints the same output.
 
-If there is no `.codegraph/` directory, skip CodeGraph entirely — indexing is a per-project opt-in.
+If there is no `.codegraph/` directory, skip CodeGraph entirely — indexing is a per-project opt-in. It also doesn't apply everywhere: pure shell-script/config or markdown-only repos (e.g. `~/Code/dotfiles`, this `claude-code-config` repo itself) yield little to nothing to index — verified directly, `codegraph init` on `dotfiles` returns "No files found to index" since Fish isn't a language it parses. Don't suggest indexing those; see `rules/common/modern-cli-tools.md` for the concrete case.
