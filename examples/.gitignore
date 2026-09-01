@@ -14,3 +14,13 @@ dist/
 build/
 .coverage
 htmlcov/
+
+# C/C++ projects only (see rules/cpp/build-architecture.md) — delete this
+# block if the project has no C/C++.
+build-sanitized/
+vcpkg_installed/
+*.o
+*.obj
+*.exe
+*.dll
+*.pdb

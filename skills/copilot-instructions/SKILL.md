@@ -26,15 +26,16 @@ already define for Claude, transposed into the format Copilot understands.
 ### 1. Inventory the actual project (never guess)
 
 ```fish
-find . -name "*.py" -not -path "*/.venv/*" | head -20
-cat pyproject.toml 2>/dev/null
+cat pyproject.toml 2>/dev/null; cat CMakeLists.txt 2>/dev/null; cat package.json 2>/dev/null
 cat README.md 2>/dev/null | head -30
 git log --oneline -n 20
 ```
 
-Identify: the actual stack (versions in `pyproject.toml`), folder
-structure (`src/`, `tests/`, naming conventions already in place), lint/test
-tools already configured, commit style already used.
+Identify the actual stack from whichever manifest exists (`pyproject.toml`
+→ Python, `CMakeLists.txt`/`vcpkg.json` → C/C++, `package.json` → JS/TS)
+— never assume Python by default. Then identify: language version, folder
+structure (`src/`+`tests/` for Python, `include/`+`src/`+`tests/` for C/C++),
+lint/test tools already configured, commit style already used.
 
 ### 2. Never duplicate what the linter already enforces
 
@@ -65,9 +66,9 @@ degrades beyond that):
 [One or two sentences: what the app does, for whom]
 
 ## Tech stack
-- Language: Python [exact version from pyproject.toml]
+- Language: [detected language + exact version, from pyproject.toml/CMakeLists.txt/package.json]
 - Key dependencies: [list main libs with their role, not just names]
-- Tools: ruff (lint+format), mypy --strict (typing), pytest (tests), [Docker if present]
+- Tools: [the project's actual lint/type/test tools — e.g. ruff+mypy+pytest for Python, clang-format+clang-tidy+cppcheck+CTest for C/C++ — never assume Python's toolset for a non-Python project]
 
 ## Code conventions
 [Non-trivial rules only — not what ruff already enforces]

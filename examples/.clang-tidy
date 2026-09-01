@@ -2,6 +2,8 @@
 # not a single official preset (unlike ruff/eslint). Re-verify the family
 # list against a fresh LLVM release before trusting an older copy.
 # See rules/cpp/lint-strict.md for the rationale behind each override.
+# Reviewed: 2026-09-01 — see rules/common/rule-freshness.md before trusting
+# this unchanged much later; check the LLVM release notes first.
 Checks: >
   -*,
   bugprone-*,

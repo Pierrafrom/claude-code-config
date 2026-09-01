@@ -1,6 +1,8 @@
 # Base: clang.llvm.org/docs/ClangFormatStyleOptions.html — BasedOnStyle: Google
 # Re-check before trusting on a clang-format major version bump.
 # See rules/cpp/lint-strict.md for the rationale behind each override.
+# Reviewed: 2026-09-01 — see rules/common/rule-freshness.md before trusting
+# this unchanged much later; check clang-format's release notes first.
 BasedOnStyle: Google
 ColumnLimit: 100
 IndentWidth: 4

@@ -1,4 +1,7 @@
 {
+  // Reviewed: 2026-09-01 — CMakePresets.json supports // comments (JSONC).
+  // See rules/common/rule-freshness.md before trusting this unchanged
+  // much later; check cmake.org's CMakePresets changelog first.
   "version": 6,
   "configurePresets": [
     {

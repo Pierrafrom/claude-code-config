@@ -1,0 +1,55 @@
+# Mirrors the local quality gate: CMake+Ninja+vcpkg build under the
+# "sanitized" preset (ASan+UBSan), clang-format check, clang-tidy,
+# cppcheck — same tools and same non-negotiable sanitizer policy as
+# .pre-commit-config.yaml and rules/cpp/lint-strict.md / build-architecture.md,
+# so CI never disagrees with what a local commit already enforced.
+#
+# Runs on ubuntu-latest (not Windows/MinGW) since GitHub-hosted Linux
+# runners are the portable, free-tier default and give full ASan+UBSan
+# support (MinGW's sanitizer support is more limited — see
+# rules/cpp/build-architecture.md). Adapt the runner/toolchain if this
+# project must also validate on Windows/MSVC.
+#
+# Generated 2026-09-01 — re-check rules/cpp/lint-strict.md's "Sources to
+# watch" table before trusting this unchanged after a clang-tidy/LLVM
+# major bump.
+name: CI (C/C++)
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install toolchain
+        run: sudo apt-get update && sudo apt-get install -y ninja-build clang-tidy clang-format cppcheck
+
+      - name: Bootstrap vcpkg
+        run: |
+          git clone https://github.com/microsoft/vcpkg "${{ github.workspace }}/vcpkg"
+          "${{ github.workspace }}/vcpkg/bootstrap-vcpkg.sh"
+
+      - name: Configure (sanitized)
+        run: cmake --preset sanitized
+        env:
+          VCPKG_ROOT: ${{ github.workspace }}/vcpkg
+
+      - name: Format check (clang-format)
+        run: find src include -name "*.cpp" -o -name "*.h" | xargs clang-format --dry-run --Werror
+
+      - name: Build (sanitized)
+        run: cmake --build --preset sanitized
+
+      - name: Lint (clang-tidy)
+        run: clang-tidy -p build-sanitized --warnings-as-errors='*' $(find src -name "*.cpp")
+
+      - name: Static analysis (cppcheck)
+        run: cppcheck --enable=all --error-exitcode=1 --suppress=missingIncludeSystem src include
+
+      - name: Tests (ASan + UBSan)
+        run: ctest --preset sanitized --output-on-failure

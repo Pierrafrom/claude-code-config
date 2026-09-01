@@ -1,5 +1,7 @@
 # Reference CMakeLists.txt — level 1 project structure, see
 # rules/cpp/build-architecture.md. Copy and adapt target/module names.
+# Reviewed: 2026-09-01 — see rules/common/rule-freshness.md before trusting
+# this unchanged much later.
 cmake_minimum_required(VERSION 3.25)
 project(my_tool LANGUAGES CXX)
 
