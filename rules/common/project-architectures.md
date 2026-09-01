@@ -64,7 +64,8 @@ A file lives as close as possible to where it's used:
 | Next.js App Router (frontend/fullstack) | `rules/frontend/nextjs-architecture.md` |
 | Turborepo monorepo (JS/TS fullstack) | `rules/frontend/monorepo-turborepo.md` |
 | FastAPI (Python backend, 3 complexity levels) | `rules/python/fastapi-architecture.md` |
-| C/C++ (CMake, vcpkg, 2 complexity levels) | `rules/cpp/build-architecture.md` |
+| C/C++, portable profile (CMake, vcpkg, 2 complexity levels) | `rules/cpp/build-architecture.md` |
+| C/C++, MSVC/Visual Studio native profile (C++/CLI, WinForms, COM, or an existing `.sln`) | `rules/cpp/msvc-visual-studio.md` |
 | Data science / MLOps (Python) | `rules/data/project-structure.md` |
 | dbt data warehouse | `rules/data/sql-dbt.md` (architecture section) |
 
@@ -83,8 +84,9 @@ This project is...
 │   └── Complex / audited / multi-backend system → FastAPI level 3 (hexagonal)
 │
 ├── C / C++
-│   ├── Small tool or single library → build-architecture level 1
-│   └── Larger app with multiple internal modules → build-architecture level 2
+│   ├── An existing .sln/.vcxproj, or needs C++/CLI/WinForms/COM → msvc-visual-studio.md
+│   ├── Small tool or single library → build-architecture level 1 (portable profile)
+│   └── Larger app with multiple internal modules → build-architecture level 2 (portable profile)
 │
 ├── Data / ML
 │   ├── Exploration / research → Cookiecutter Data Science v2 layout

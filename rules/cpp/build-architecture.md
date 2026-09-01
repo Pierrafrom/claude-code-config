@@ -6,6 +6,26 @@ as `rules/python/fastapi-architecture.md`'s three levels. Shared between
 C and C++ projects — the idiom files (`rules/cpp/cpp-patterns.md`,
 `rules/cpp/c-patterns.md`) diverge, the build tooling doesn't.
 
+## Toolchain routing — two profiles, pick by project signal, not by habit
+
+This file (and `rules/cpp/lint-strict.md`) documents the **portable
+profile**: CMake+Ninja+vcpkg, a portable compiler (MinGW-w64/GCC/Clang),
+ASan+UBSan. This is the default for any C/C++ project started from
+scratch — coursework labs, CLI tools, libraries meant to also build on
+Linux/CI.
+
+Route to the **MSVC/Visual Studio native profile** instead
+(`rules/cpp/msvc-visual-studio.md`) when either signal is present:
+- A `.sln`/`.vcxproj` already exists (a provided starter/skeleton) —
+  never wrap an existing Visual Studio project in a fresh CMake setup.
+- The project requires a Windows-only feature CMake+a portable compiler
+  cannot build at all: **C++/CLI** (`<CLRSupport>true</CLRSupport>`,
+  `ref class`, WinForms `.resx` UI), COM, or a hard MSVC-only dependency.
+
+Both profiles can coexist on the same machine with zero conflict — they
+never share a PATH entry or a build directory. Which one applies is a
+per-project decision, not a machine-wide default to pick once.
+
 ## Build system: CMake, no alternative considered by default
 
 CMake is the de facto standard for C/C++ — cross-platform, the only
