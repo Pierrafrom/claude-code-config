@@ -1,0 +1,181 @@
+% cours-preamble.sty
+% Base: shared preamble for the cours-latex skill (skills/cours-latex/SKILL.md).
+% Requires LuaLaTeX (fontspec/unicode-math/microtype) and compilation with
+% -shell-escape (minted). Compile via docker/latex/ — see that README.
+% Every package below is loaded at its widely-documented, actively
+% maintained default: nothing here is a from-scratch reimplementation of
+% functionality the package already provides.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cours-preamble}[2026/09/09 cours-latex shared preamble]
+
+% --- Language & typography -------------------------------------------------
+% babel(french): more complete French-specific typographic rules (spacing
+% before : ; ! ?, list/quote conventions) than polyglossia as of 2026 —
+% see the "Fidélité" note in the cours-latex plan for the comparison.
+\RequirePackage[french]{babel}
+\RequirePackage{microtype}
+% csquotes is loaded further below, after minted/fvextra — fvextra's own
+% documentation asks for that order to avoid a startup warning.
+
+% --- Fonts (LuaLaTeX) --------------------------------------------------------
+% Libertinus ships complete (Serif/Sans/Mono/Math) in the TeX Live "full"
+% scheme already used by the cours-latex image — no extra font package
+% needed for text/math. Fira Code is installed explicitly in the image for
+% code listings (see docker/latex/Dockerfile).
+\RequirePackage{fontspec}
+\setmainfont{Libertinus Serif}
+\setsansfont{Libertinus Sans}
+% ItalicFont pinned to the regular face on purpose: Fira Code ships no
+% italic cut, so without this fontspec falls back silently but noisily
+% (a "font shape undefined" warning on every minted comment).
+\setmonofont{Fira Code}[Scale=0.9, ItalicFont={Fira Code}]
+\RequirePackage{unicode-math}
+\setmathfont{Libertinus Math}
+
+% --- Colour palette: sober academic ----------------------------------------
+\RequirePackage{xcolor}
+\definecolor{coursnavy}{HTML}{1B3A5C}
+\definecolor{coursgray}{HTML}{5B6470}
+\definecolor{coursaccent}{HTML}{9C4221} % single warm accent — theorem/example borders, links
+
+% --- Page & chapter/section styling -----------------------------------------
+% scrbook (KOMA-Script) ships its own font-element customization API —
+% \setkomafont — which restyles headings without fighting the class's
+% internal \@make*chapterhead machinery. `titlesec` was deliberately
+% avoided here: it redefines those internals directly and triggers KOMA's
+% own "deprecated code" warnings on every compile.
+\setkomafont{chapter}{\normalfont\sffamily\color{coursnavy}\Huge\bfseries}
+\setkomafont{section}{\normalfont\sffamily\color{coursnavy}\Large\bfseries}
+\setkomafont{subsection}{\normalfont\sffamily\color{coursnavy}\large\bfseries}
+
+% scrlayer-scrpage (KOMA-native header/footer package) rather than
+% fancyhdr: scrbook explicitly warns that fancyhdr wasn't designed for its
+% page-style system — scrlayer-scrpage is the documented replacement.
+%
+% Single-argument \automark{chapter} on purpose: with the two-argument
+% form \automark[section]{chapter}, the running header alternates its
+% *content* (chapter name vs. section name) between pages, and with a
+% \documentclass[...,twoside]{...} class option it additionally mirrors
+% which *side* (\ihead/\ohead -> inner/outer) that content lands on for
+% odd vs. even pages. Both are meant for a printed, bound book read as
+% facing pages — for a document read on screen (this one), they produce
+% a header that visibly jumps left/right and swaps text every other
+% page, which reads as a layout bug, not a book-binding convention. A
+% single stable mark (always the current chapter, always the same side)
+% removes that entirely, on top of switching the class to `oneside` (see
+% main.tex) so page margins stop mirroring too.
+\RequirePackage[automark]{scrlayer-scrpage}
+\clearpairofpagestyles
+\automark{chapter}
+\ihead{\headmark}
+\ohead{\pagemark}
+\setkomafont{pageheadfoot}{\normalfont\footnotesize\color{coursgray}}
+\pagestyle{scrheadings}
+
+% --- Theorem-like boxes (tcolorbox, no amsthm dependency for these) --------
+\RequirePackage[most]{tcolorbox}
+\tcbuselibrary{theorems, skins, breakable}
+
+\newtcbtheorem[number within=chapter]{definition}{Définition}
+  {colback=coursnavy!5, colframe=coursnavy, fonttitle=\sffamily\bfseries,
+   breakable, enhanced}{def}
+
+\newtcbtheorem[number within=chapter]{theoreme}{Théorème}
+  {colback=coursaccent!6, colframe=coursaccent, fonttitle=\sffamily\bfseries,
+   breakable, enhanced}{thm}
+
+\newtcbtheorem[number within=chapter]{proposition}{Proposition}
+  {colback=coursaccent!4, colframe=coursaccent!70!black, fonttitle=\sffamily\bfseries,
+   breakable, enhanced}{prop}
+
+\newtcbtheorem[number within=chapter]{exemple}{Exemple}
+  {colback=coursgray!8, colframe=coursgray, fonttitle=\sffamily\bfseries,
+   breakable, enhanced}{ex}
+
+% remarque/intuition: colored TEXT on a near-white bar, not white text on
+% a light-tinted bar — colframe!60/!50 tints previously used as a *solid
+% title-bar background with white text* measured ~2.6-2.8:1 contrast
+% (WCAG minimum is 4.5:1 for normal text, 3:1 for large/bold) — a real
+% legibility problem, not just a stylistic quibble. Dark-on-near-white
+% comfortably clears 4.5:1 regardless of the exact tint, so this flips
+% the pairing instead of trying to find a "just light enough" tint.
+\newtcbtheorem[number within=chapter]{remarque}{Remarque}
+  {colback=white, colbacktitle=coursgray!15, coltitle=coursgray!30!black,
+   colframe=coursgray, fonttitle=\sffamily\bfseries,
+   breakable, enhanced, boxrule=0.5pt}{rem}
+
+% No side-stripe accent (borderline west) on top of the box border: a
+% full border already marks the box; adding a second, different-weight
+% colored accent on one edge reads as visual noise rather than added
+% meaning, and is inconsistent with every sibling environment's plain
+% border.
+\newtcbtheorem[number within=chapter]{intuition}{Intuition}
+  {colback=coursnavy!3, colbacktitle=coursnavy!8, coltitle=coursnavy,
+   colframe=coursnavy, fonttitle=\sffamily\itshape,
+   breakable, enhanced}{int}
+
+% Plain "proof" environment (amsthm), deliberately undecorated — classic
+% demonstration style ending with \qedsymbol, distinct from the coloured
+% boxes above.
+\RequirePackage{amsthm}
+\renewcommand{\proofname}{Démonstration}
+
+% mathtools: the standard, widely-adopted superset of amsmath (extra
+% environments, \xleftrightarrow, better matrix/align support) — loaded
+% here rather than amsmath directly since mathtools already loads and
+% patches it.
+\RequirePackage{mathtools}
+
+% booktabs: the standard rules (\toprule/\midrule/\bottomrule) for
+% publication-quality tables (comparison tables, reference lists) —
+% avoids the vertical/heavy grid lines of a plain tabular.
+\RequirePackage{booktabs}
+
+% --- Code listings (minted, requires -shell-escape) -------------------------
+\RequirePackage{minted}
+\setminted{
+  fontsize=\small,
+  breaklines,
+  breakanywhere,
+  frame=lines,
+  framesep=2mm,
+  rulecolor=\color{coursgray},
+  linenos,
+  numbersep=5pt,
+}
+\setmintedinline{fontsize=\normalsize}
+
+\RequirePackage[autostyle]{csquotes} % « guillemets » that follow babel's language switches
+
+% --- Diagrams -----------------------------------------------------------
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta, positioning, automata, calc, shapes.geometric}
+
+% --- Links & PDF metadata (filled per-course by main.tex) ------------------
+% Loaded before glossaries on purpose: the glossaries package docs require
+% hyperref to be loaded first for its cross-reference links to work.
+\RequirePackage[
+  colorlinks=true,
+  linkcolor=coursnavy,
+  citecolor=coursnavy,
+  urlcolor=coursaccent,
+  bookmarksopen=true,
+  bookmarksnumbered=true,
+]{hyperref}
+\RequirePackage{bookmark}
+
+% --- Glossary (printed at the end of main.tex via \printglossary) ---------
+% xindy (not the default makeindex) is required for correct alphabetical
+% grouping of accented French entries (é, à, ...) — plain makeindex isn't
+% UTF-8 aware and corrupts the group-heading byte sequence at sort time.
+\RequirePackage[toc, xindy]{glossaries}
+\makeglossaries
+% The [toc] option's ToC entry is captured before babel/translator's
+% french glossary-name translation takes effect, so it stays "Glossary"
+% even though the printed heading correctly shows "Glossaire" — pass
+% title/toctitle explicitly to \printglossary in main.tex rather than
+% relying on that translation timing.
+
+\endinput

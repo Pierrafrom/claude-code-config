@@ -1,0 +1,36 @@
+# LaTeX build artifacts — copied as .gitignore into every course repo
+# scaffolded by the cours-latex skill (skills/cours-latex/SKILL.md).
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+*.nav
+*.snm
+
+# glossaries package
+*.glo
+*.gls
+*.glg
+*.glsdefs
+*.ist
+*.acn
+*.acr
+*.alg
+
+# minted (Pygments cache directory, one per document)
+_minted-*/
+
+# raw PDF extraction working files (kept out of git; final assets that
+# make it into the course live under images/, not images/raw/)
+images/raw/
+
+build/
