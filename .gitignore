@@ -14,3 +14,7 @@ skills/emil-design-eng
 skills/review-animations
 skills/design-taste-frontend
 skills/theme-factory
+
+# Anthropic skills synced by the Claude desktop app (docx, pdf, pptx...) —
+# app-managed, machine-local, not this repo's own content
+skills/synced/
