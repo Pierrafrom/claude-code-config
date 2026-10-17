@@ -1,3 +1,7 @@
+---
+paths: ["**/*.c", "**/*.h", "**/*.cc", "**/*.cpp", "**/*.hpp", "**/*.hh", "**/CMakeLists.txt", "**/CMakePresets.json", "**/vcpkg.json", "**/.clang-tidy", "**/.clang-format"]
+---
+
 # C++ architectural patterns and idioms — shared vocabulary, not obligations
 
 Concrete C++ instantiation of `rules/common/oop-design.md`'s "design

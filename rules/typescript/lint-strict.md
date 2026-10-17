@@ -1,3 +1,7 @@
+---
+paths: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.mjs", "**/*.cjs", "**/package.json", "**/tsconfig*.json", "**/biome.json", "**/eslint.config.js"]
+---
+
 # TypeScript/JavaScript lint — STRICT level
 
 See `rules/common/config-standards.md` for the general "extend the

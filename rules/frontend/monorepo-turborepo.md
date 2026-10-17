@@ -1,3 +1,7 @@
+---
+paths: ["**/*.ts", "**/*.tsx", "**/*.jsx", "**/*.css", "**/*.scss", "**/package.json", "**/next.config.*", "**/tailwind.config.*", "**/turbo.json", "**/components.json"]
+---
+
 # Turborepo monorepo — project structure
 
 See `rules/common/project-architectures.md` for the governing rule — only

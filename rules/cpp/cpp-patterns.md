@@ -1,3 +1,7 @@
+---
+paths: ["**/*.c", "**/*.h", "**/*.cc", "**/*.cpp", "**/*.hpp", "**/*.hh", "**/CMakeLists.txt", "**/CMakePresets.json", "**/vcpkg.json", "**/.clang-tidy", "**/.clang-format"]
+---
+
 # C++ rules — style, memory, error handling
 
 Scope: modern C++ (target C++20 by default, see `rules/cpp/lint-strict.md`

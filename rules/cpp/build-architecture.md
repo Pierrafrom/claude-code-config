@@ -1,3 +1,7 @@
+---
+paths: ["**/*.c", "**/*.h", "**/*.cc", "**/*.cpp", "**/*.hpp", "**/*.hh", "**/CMakeLists.txt", "**/CMakePresets.json", "**/vcpkg.json", "**/.clang-tidy", "**/.clang-format"]
+---
+
 # C/C++ build & project structure — CMake, vcpkg, sanitizers, tests
 
 See `rules/common/project-architectures.md` for the governing rule: pick

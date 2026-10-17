@@ -1,3 +1,7 @@
+---
+paths: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.mjs", "**/*.cjs", "**/package.json", "**/tsconfig*.json", "**/biome.json", "**/eslint.config.js"]
+---
+
 # TypeScript typing — STRICT level
 
 Typing is a design tool, not decoration — same posture as

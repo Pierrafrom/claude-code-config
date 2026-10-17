@@ -1,3 +1,7 @@
+---
+paths: ["**/*.ts", "**/*.tsx", "**/*.jsx", "**/*.css", "**/*.scss", "**/package.json", "**/next.config.*", "**/tailwind.config.*", "**/turbo.json", "**/components.json"]
+---
+
 # Frontend design skill routing
 
 Several installed skills/plugins all respond to roughly the same trigger
