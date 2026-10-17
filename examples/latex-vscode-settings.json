@@ -1,0 +1,40 @@
+// Copied to .vscode/settings.json by the cours-latex skill. Compiles via
+// the shared cours-latex:latest Docker image (see docker/latex/README.md)
+// — never a local TeX Live install. Works identically whether this repo
+// is opened natively on Windows or via VS Code Remote-WSL, since both
+// share the same Docker Desktop engine.
+{
+  "latex-workshop.docker.enabled": true,
+  "latex-workshop.docker.image.latex": "cours-latex:latest",
+
+  // No -pdf/-lualatex flag here on purpose: the project's own .latexmkrc
+  // already sets $pdf_mode=4 (LuaLaTeX) + -shell-escape (minted) —
+  // passing -pdf on the command line would override it and silently
+  // fall back to pdflatex, breaking fontspec/unicode-math/minted.
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk-cours",
+      "command": "latexmk",
+      "args": ["-synctex=1", "-interaction=nonstopmode", "-file-line-error", "%DOC%"]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "cours-latex (docker)",
+      "tools": ["latexmk-cours"]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "cours-latex (docker)",
+  "latex-workshop.latex.autoBuild.run": "onSave",
+
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux", "*.log", "*.out", "*.toc", "*.synctex.gz", "*.fls", "*.fdb_latexmk",
+    "*.glo", "*.gls", "*.glg", "*.ist", "*.xdy", "*.acn", "*.acr", "*.alg"
+  ],
+
+  "[latex]": {
+    "editor.wordWrap": "on"
+  },
+
+  "ltex.language": "fr"
+}

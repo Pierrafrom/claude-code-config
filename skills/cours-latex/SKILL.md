@@ -58,6 +58,8 @@ S'il n'existe pas encore :
    - `latex.gitignore` → `.gitignore`
    - `latex.latexmkrc` → `.latexmkrc`
    - `compile.sh` (avec permission d'exécution) et `compile.ps1`
+   - `latex-vscode-settings.json` → `.vscode/settings.json`
+   - `latex-vscode.code-snippets` → `.vscode/cours-latex.code-snippets`
 3. Créer `glossaire.tex` vide.
 4. Vérifier que l'image Docker existe : `docker image inspect cours-latex:latest`.
    Si absente, le signaler et proposer le build (`docker/latex/README.md`)

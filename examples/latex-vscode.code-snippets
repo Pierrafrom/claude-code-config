@@ -1,0 +1,77 @@
+// Copied to .vscode/cours-latex.code-snippets by the cours-latex skill —
+// scoped to LaTeX files, matching the environments defined in
+// examples/latex-preamble.sty (cours-preamble.sty once copied).
+{
+  "Définition": {
+    "scope": "latex",
+    "prefix": "def",
+    "body": ["\\begin{definition}{${1:Titre}}{def:${2:label}}", "$0", "\\end{definition}"],
+    "description": "Environnement définition"
+  },
+  "Théorème": {
+    "scope": "latex",
+    "prefix": "thm",
+    "body": ["\\begin{theoreme}{${1:Titre}}{thm:${2:label}}", "$0", "\\end{theoreme}"],
+    "description": "Environnement théorème"
+  },
+  "Proposition": {
+    "scope": "latex",
+    "prefix": "prop",
+    "body": ["\\begin{proposition}{${1:Titre}}{prop:${2:label}}", "$0", "\\end{proposition}"],
+    "description": "Environnement proposition"
+  },
+  "Exemple": {
+    "scope": "latex",
+    "prefix": "exe",
+    "body": ["\\begin{exemple}{${1:Titre}}{ex:${2:label}}", "$0", "\\end{exemple}"],
+    "description": "Environnement exemple"
+  },
+  "Remarque": {
+    "scope": "latex",
+    "prefix": "rem",
+    "body": ["\\begin{remarque}{${1:Titre}}{rem:${2:label}}", "$0", "\\end{remarque}"],
+    "description": "Environnement remarque"
+  },
+  "Intuition": {
+    "scope": "latex",
+    "prefix": "int",
+    "body": ["\\begin{intuition}{${1:Titre}}{int:${2:label}}", "$0", "\\end{intuition}"],
+    "description": "Environnement intuition"
+  },
+  "Démonstration": {
+    "scope": "latex",
+    "prefix": "proof",
+    "body": ["\\begin{proof}", "$0", "\\end{proof}"],
+    "description": "Environnement de démonstration (amsthm)"
+  },
+  "Bloc de code (minted)": {
+    "scope": "latex",
+    "prefix": "mint",
+    "body": ["\\begin{minted}{${1:python}}", "$0", "\\end{minted}"],
+    "description": "Bloc de code coloré"
+  },
+  "Schéma TikZ": {
+    "scope": "latex",
+    "prefix": "tikz",
+    "body": ["\\begin{center}", "\\begin{tikzpicture}", "$0", "\\end{tikzpicture}", "\\end{center}"],
+    "description": "Schéma TikZ centré"
+  },
+  "Nouvelle entrée de glossaire": {
+    "scope": "latex",
+    "prefix": "newgls",
+    "body": ["\\newglossaryentry{${1:label}}{", "  name={${2:terme}},", "  description={${3:description}}", "}"],
+    "description": "Nouvelle entrée de glossaire"
+  },
+  "Référence glossaire": {
+    "scope": "latex",
+    "prefix": "gls",
+    "body": ["\\gls{${1:label}}"],
+    "description": "Référence à une entrée du glossaire"
+  },
+  "Nouveau chapitre (squelette)": {
+    "scope": "latex",
+    "prefix": "newchap",
+    "body": ["\\chapter{${1:Titre du chapitre}}", "", "$0"],
+    "description": "Squelette de nouveau chapitre"
+  }
+}

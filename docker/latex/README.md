@@ -61,6 +61,50 @@ docker run --rm -v "$(pwd):/workspace" -w /workspace cours-latex:latest \
 the image on purpose — the wrapper scripts pass the full command
 (`latexmk`, `pdftotext`, `pdfimages`, or a shell for debugging) each time.
 
+## Editing with VS Code
+
+The `cours-latex` skill copies `examples/latex-vscode-settings.json` →
+`.vscode/settings.json` and `examples/latex-vscode.code-snippets` →
+`.vscode/cours-latex.code-snippets` into every scaffolded course repo.
+Install:
+
+- **LaTeX Workshop** (`James-Yu.latex-workshop`) — compilation, SyncTeX,
+  the built-in PDF viewer.
+- **LTeX** (`valentjn.vscode-ltex`) — French grammar/spell-checking
+  inside `.tex` files (the settings file sets `ltex.language: fr`).
+- **WSL** (`ms-vscode-remote.remote-wsl`) — only needed when the course
+  repo lives under a WSL2 path (e.g. `~/Code/cours-*`) rather than a
+  native Windows path — opens VS Code's server inside WSL2 so `docker`
+  resolves to Docker Desktop's WSL integration instead of the Windows
+  side. Same `settings.json` works unchanged either way, since both
+  sides share one Docker Desktop engine (confirmed: `docker context ls`
+  shows the same `desktop-linux` context from both PowerShell and WSL2).
+
+The settings file enables LaTeX Workshop's native Docker support
+(`latex-workshop.docker.enabled` + `latex-workshop.docker.image.latex:
+"cours-latex:latest"`) rather than a hand-rolled `docker run` recipe —
+the officially supported mechanism, per
+`rules/common/config-standards.md`'s "extend the official baseline"
+principle. **Important**: the custom `latexmk-cours` tool defined there
+deliberately omits `-pdf`/`-lualatex` — LaTeX Workshop's *default*
+recipe passes `-pdf`, which would override the course repo's own
+`.latexmkrc` (`$pdf_mode=4`, LuaLaTeX) and silently fall back to
+pdflatex, breaking `fontspec`/`unicode-math`/`minted`.
+
+**Known limitation**: LaTeX Workshop has an open upstream issue with
+SyncTeX (PDF↔source jump) for source files in a subdirectory when
+compiling via Docker — course chapters live under `chapitres/`, so
+forward/inverse search may not resolve correctly for chapter files even
+though it works for `main.tex`. Not fixed on this end; tracked upstream
+at [James-Yu/LaTeX-Workshop#2107](https://github.com/James-Yu/LaTeX-Workshop/issues/2107).
+
+**Not verified interactively**: the JSON/JSONC in both template files
+was validated for syntax (parses cleanly), but the actual VS Code
+compile-on-save/SyncTeX/snippet behavior has not been click-tested in a
+running VS Code instance — this environment has no way to drive the VS
+Code GUI. Confirm the build recipe and SyncTeX behavior yourself on
+first use.
+
 ## Verified end-to-end (2026-09-09)
 
 A full test compile (definition/theorem/example/remark/intuition boxes,
