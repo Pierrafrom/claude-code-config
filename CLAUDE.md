@@ -55,7 +55,7 @@ Domain-specific rule files (load by project context — routing logic is in each
 - MLOps / LLMOps / RAG pipelines → `rules/data/mlops-rag.md`
 - DevOps (CI/CD, Docker, GitOps/IaC, observability, DevSecOps) → `rules/devops/devops.md`
 - TypeScript/JavaScript typing, lint, patterns, architecture → `rules/typescript/*`
-- C/C++ idioms, lint (clang-format/clang-tidy/cppcheck), build (CMake/vcpkg) → `rules/cpp/*`
+- C/C++ idioms, lint (clang-format/clang-tidy/cppcheck), build (CMake/vcpkg) → `rules/cpp/*`; MSVC/Visual Studio native projects (C++/CLI, WinForms, COM, existing `.sln`) → `rules/cpp/msvc-visual-studio.md`
 - Which frontend design skill/plugin to use, by surface type → `rules/frontend/design-skill-routing.md`
 - Project directory structure by stack (Next.js, Turborepo, FastAPI, data science/MLOps, dbt) → `rules/common/project-architectures.md` (these are patterns to converge toward, not mandates — read the governing-rule note there before applying one rigidly)
 - Modern CLI toolset installed on this machine (legacy→modern command table, fzf widgets, maintenance functions) → `rules/common/modern-cli-tools.md`
