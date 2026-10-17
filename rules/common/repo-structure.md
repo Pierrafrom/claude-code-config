@@ -28,7 +28,7 @@ project/
 ├── docker/
 │   ├── Dockerfile
 │   └── docker-compose.yml
-└── docs/                    # organized by topic per rules/common/documentation.md (architecture, setup, testing, ADRs)
+└── docs/                    # organized by topic per rules/common/documentation.md (architecture, setup, testing, ADRs, specs/)
 ```
 
 ## Concrete rules against wasting tokens

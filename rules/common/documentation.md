@@ -28,8 +28,11 @@ docs/
 ├── setup.md             # full installation/setup guide beyond the README quickstart
 ├── testing.md           # how to run tests, write new ones, coverage expectations
 ├── deployment.md        # build/deploy/run in production if applicable
+├── specs/               # one folder per feature spec (spec.md, plan.md, tasks.md) — see rules/common/spec-driven-development.md
 └── decisions/           # ADRs (Architecture Decision Records) for significant, hard-to-reverse choices, one file per decision
 ```
+
+Specs are documentation like any other: link them from the README or a `docs/` index, and update a spec-anchored one in the same change as the code. The format, tiers and quality bar live only in `rules/common/spec-driven-development.md`.
 
 Don't create a `docs/` subfile for a topic that's only a paragraph — fold it into the README or the closest existing file instead. One focused file per real topic, not one file per heading.
 
