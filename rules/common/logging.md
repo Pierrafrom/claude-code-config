@@ -60,6 +60,32 @@ Optional field: `trace_id` if several steps of the same pipeline need to be corr
 - Output: a file sink at `logs/<name>.jsonl` (gitignored, same convention
   as Python) plus a stdout sink in dev builds.
 
+## TypeScript setup (`pino`)
+
+- `pino` is the default for Node services (JSON by default, low overhead).
+  One logger module per process; one child logger per module.
+- Map pino's output onto this file's fields: ISO `ts`, upper-case `level`
+  label, `module` from the child binding, structured data under `ctx`:
+  ```ts
+  import { pino } from "pino";
+
+  export const logger = pino({
+    level: process.env["LOG_LEVEL"] ?? "info",
+    base: undefined, // drop pid/hostname noise
+    timestamp: () => `,"ts":"${new Date().toISOString()}"`,
+    formatters: { level: (label) => ({ level: label.toUpperCase() }) },
+    redact: ["ctx.password", "ctx.token", "ctx.secret", "req.headers.authorization"],
+  });
+
+  export const childLogger = (module: string) => logger.child({ module });
+  // childLogger("data.loader").error({ ctx: { file, col } }, "missing column");
+  ```
+- pino does not guarantee key order; filter with `jq`/`grep` on keys, not
+  position. Keep `redact` paths static (never built from user input).
+- Output to stdout in containers (collected by the platform) and to
+  `logs/<name>.jsonl` in local dev; the same `grep '"level":"ERROR"'`
+  workflow below applies.
+
 ## What to log (and what NOT to log)
 
 **Always log:**
