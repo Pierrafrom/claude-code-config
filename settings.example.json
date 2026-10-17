@@ -46,7 +46,6 @@
       "Bash(git push --force*)"
     ]
   },
-  "model": "sonnet",
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -59,5 +58,46 @@
       }
     ]
   },
-  "tui": "fullscreen"
+  "tui": "fullscreen",
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "impeccable@impeccable": true,
+    "ui-ux-pro-max@ui-ux-pro-max-skill": true,
+    "accesslint@accesslint": true,
+    "humanizer@humanizer": true,
+    "avoid-ai-writing@conorbronsdon-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "impeccable": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
+      }
+    },
+    "ui-ux-pro-max-skill": {
+      "source": {
+        "source": "github",
+        "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
+      }
+    },
+    "accesslint": {
+      "source": {
+        "source": "github",
+        "repo": "accesslint/skills"
+      }
+    },
+    "humanizer": {
+      "source": {
+        "source": "github",
+        "repo": "blader/humanizer"
+      }
+    },
+    "conorbronsdon-skills": {
+      "source": {
+        "source": "github",
+        "repo": "conorbronsdon/avoid-ai-writing"
+      }
+    }
+  },
+  "agentPushNotifEnabled": true
 }
