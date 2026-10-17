@@ -25,6 +25,12 @@ software engineering.
   (which installed design skill/plugin to reach for, by surface type —
   marketing/landing vs product/dashboard, see that file before starting
   any UI work).
+- Fullstack TypeScript (Expo web/iOS/Android + Hono API + Postgres + BullMQ
+  workers, pnpm monorepo): `rules/frontend/expo-react-native.md`,
+  `rules/typescript/hono-api-architecture.md`,
+  `rules/typescript/orm-drizzle.md`, `rules/data/postgres-oltp-patterns.md`,
+  `rules/devops/queues-and-workers.md`, `rules/common/security-web-api.md`,
+  `rules/common/auth-patterns.md`.
 - C/C++: coursework and personal systems/application projects, not
   safety-critical by default (see `rules/cpp/c-patterns.md`'s routing
   note if that ever changes). Detail in `rules/cpp/*` (C and C++ idioms
@@ -53,11 +59,13 @@ Domain-specific rule files (load by project context — routing logic is in each
 - Python data engineering (Polars/pandas, Pandera, pipeline structure) → `rules/data/data-engineering.md`
 - Database design (OLTP/3NF, Kimball/star schema, Data Vault, SCD) → `rules/data/db-design.md`
 - MLOps / LLMOps / RAG pipelines → `rules/data/mlops-rag.md`
-- DevOps (CI/CD, Docker, GitOps/IaC, observability, DevSecOps) → `rules/devops/devops.md`
-- TypeScript/JavaScript typing, lint, patterns, architecture → `rules/typescript/*`
+- Transactional PostgreSQL patterns (idempotency, ledger, locking, backups) → `rules/data/postgres-oltp-patterns.md`
+- DevOps (CI/CD, Docker, GitOps/IaC, observability, DevSecOps) → `rules/devops/devops.md`; background jobs/queues → `rules/devops/queues-and-workers.md`
+- Web/API security checklist (OWASP API Top 10) → `rules/common/security-web-api.md`; authentication wiring → `rules/common/auth-patterns.md`
+- TypeScript/JavaScript typing, lint, patterns, architecture → `rules/typescript/*` (incl. Hono API structure, Drizzle ORM); Expo / React Native / NativeWind → `rules/frontend/expo-react-native.md`
 - C/C++ idioms, lint (clang-format/clang-tidy/cppcheck), build (CMake/vcpkg) → `rules/cpp/*`; MSVC/Visual Studio native projects (C++/CLI, WinForms, COM, existing `.sln`) → `rules/cpp/msvc-visual-studio.md`
 - Which frontend design skill/plugin to use, by surface type → `rules/frontend/design-skill-routing.md`
-- Project directory structure by stack (Next.js, Turborepo, FastAPI, data science/MLOps, dbt) → `rules/common/project-architectures.md` (these are patterns to converge toward, not mandates — read the governing-rule note there before applying one rigidly)
+- Project directory structure by stack (Next.js, Turborepo, Expo + Hono, FastAPI, data science/MLOps, dbt) → `rules/common/project-architectures.md` (these are patterns to converge toward, not mandates — read the governing-rule note there before applying one rigidly)
 - Modern CLI toolset installed on this machine (legacy→modern command table, fzf widgets, maintenance functions) → `rules/common/modern-cli-tools.md`
 
 - **Strict clean code**: short functions/single responsibility, zero dead code, zero duplication, explicit naming without relying on comments — split into sub-functions only when each has an autonomous, reusable meaning, not by dogmatic line-count (see the Ousterhout nuance in `rules/common/coding-style.md`)

@@ -63,6 +63,7 @@ A file lives as close as possible to where it's used:
 |---|---|
 | Next.js App Router (frontend/fullstack) | `rules/frontend/nextjs-architecture.md` |
 | Turborepo monorepo (JS/TS fullstack) | `rules/frontend/monorepo-turborepo.md` |
+| Expo + Hono pnpm monorepo (web/iOS/Android client + Node API + worker) | `rules/frontend/expo-react-native.md`, `rules/typescript/hono-api-architecture.md`, pnpm section of `rules/frontend/monorepo-turborepo.md` |
 | FastAPI (Python backend, 3 complexity levels) | `rules/python/fastapi-architecture.md` |
 | C/C++, portable profile (CMake, vcpkg, 2 complexity levels) | `rules/cpp/build-architecture.md` |
 | C/C++, MSVC/Visual Studio native profile (C++/CLI, WinForms, COM, or an existing `.sln`) | `rules/cpp/msvc-visual-studio.md` |
@@ -76,7 +77,9 @@ This project is...
 │
 ├── Frontend / fullstack React
 │   ├── → Next.js App Router (rules/frontend/nextjs-architecture.md)
-│   └── Multiple related apps? → Turborepo monorepo (rules/frontend/monorepo-turborepo.md)
+│   ├── Multiple related apps? → Turborepo monorepo (rules/frontend/monorepo-turborepo.md)
+│   └── Web + iOS + Android from one TS codebase, own API? → Expo + Hono pnpm monorepo
+│       (rules/frontend/expo-react-native.md + rules/typescript/hono-api-architecture.md)
 │
 ├── Python backend / API
 │   ├── MVP or small service (~10 routes, 2-3 devs) → FastAPI level 1 (layer-based)
