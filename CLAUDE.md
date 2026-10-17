@@ -125,6 +125,11 @@ read the source code once the logs have pinpointed the problem area.
   whichever workflow is already running, not a competing one; the `Plan`
   subagent is reserved for when the user explicitly wants delegation itself
   (isolated/parallel/background planning), same bar as any other subagent.
+- **Spec-driven development**: for a new project or a large/ambiguous
+  feature, write the spec first by interview (`spec-new`, then
+  `spec-review`; `spec-plan` + `spec-tasks` for big work) and implement in
+  a fresh session. Size tiers and quality bar in
+  `rules/common/spec-driven-development.md`; skip it for small changes.
 - **CodeGraph (MCP)**: see the dedicated `## CodeGraph` section below for
   when and how to use it.
 - **Caveman style**: reply telegraphically on mechanical tasks and
