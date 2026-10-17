@@ -88,3 +88,21 @@ my-monorepo/
   duplicate" principle as `rules/common/config-standards.md`.
 - One `CODEOWNERS` entry per package to make ownership explicit as the
   repo grows.
+
+## pnpm workspaces without Turborepo
+
+Turborepo is optional: for 2-3 workspaces (e.g. `apps/app`, `apps/api`,
+`packages/shared`) plain pnpm workspaces plus recursive scripts
+(`pnpm -r typecheck`, `pnpm --filter <name> ...`) are enough; add Turbo
+when task caching or ordering starts to matter. See
+`examples/pnpm-workspace.yaml`.
+
+- Expo/Metro: `node-linker=hoisted` is the conservative default;
+  isolated installs are supported since Expo SDK 54 — verify on the real
+  project (`rules/frontend/expo-react-native.md`).
+- Pin `packageManager` in the root `package.json` and the Node version in
+  `.nvmrc`; install with `--frozen-lockfile` in CI.
+- Type sharing client/server: the API exports its `AppType`; clients use
+  `import type` only, so no server code is bundled.
+- pnpm may block dependency build scripts by default — review and approve
+  explicitly (`pnpm approve-builds`) rather than disabling the check.

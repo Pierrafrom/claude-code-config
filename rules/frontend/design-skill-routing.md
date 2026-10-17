@@ -44,6 +44,16 @@ inconsistent output across a codebase. Decide by surface type:
 - **Slides, internal docs, quick landing page needing consistent tokens
   fast, no full design-system investment justified** → `theme-factory`.
 
+## React Native / Expo (native + web from one codebase)
+
+`shadcn` and the web-only skills (`vercel-react-best-practices` Next.js
+parts, `web-design-guidelines`) assume the DOM. For an Expo app, styling
+is NativeWind plus in-house components (see
+`rules/frontend/expo-react-native.md`); the visual-direction rule above
+still applies (one direction skill per project), and game-like surfaces
+(cards, collections) lean on `impeccable` product mode or
+`emil-design-eng` for motion. `accesslint` only audits the web build.
+
 ## Always-on, regardless of visual direction
 
 - `accesslint` — accessibility is not a style choice, run it on any UI
