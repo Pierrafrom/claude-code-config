@@ -1,3 +1,9 @@
+---
+paths:
+  - "**/*.py"
+  - "**/pyproject.toml"
+---
+
 # FastAPI — project structure by complexity level
 
 See `rules/common/project-architectures.md` for the governing rule: pick

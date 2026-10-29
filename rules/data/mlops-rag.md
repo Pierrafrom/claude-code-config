@@ -1,3 +1,10 @@
+---
+paths:
+  - "**/*.py"
+  - "**/*.ipynb"
+  - "**/dvc.yaml"
+---
+
 # MLOps / LLMOps / RAG — reproducibility, evaluation, operations
 
 ## Reproducibility — the foundational rule

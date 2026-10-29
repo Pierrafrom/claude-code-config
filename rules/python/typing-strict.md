@@ -1,3 +1,9 @@
+---
+paths:
+  - "**/*.py"
+  - "**/pyproject.toml"
+---
+
 # Python typing — STRICT level
 
 Typing is a design tool, not decoration (see "Strict typing as an OOP

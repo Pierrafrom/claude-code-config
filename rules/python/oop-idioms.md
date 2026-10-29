@@ -1,3 +1,9 @@
+---
+paths:
+  - "**/*.py"
+  - "**/pyproject.toml"
+---
+
 # Python OOP idioms
 
 Concrete Python instantiation of `rules/common/oop-design.md`. Apply these

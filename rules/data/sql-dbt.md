@@ -1,3 +1,10 @@
+---
+paths:
+  - "**/*.sql"
+  - "**/dbt_project.yml"
+  - "**/.sqlfluff"
+---
+
 # SQL & dbt — style, architecture, workflow
 
 ## SQL style

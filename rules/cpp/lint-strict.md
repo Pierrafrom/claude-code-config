@@ -1,3 +1,12 @@
+---
+paths:
+  - "**/*.{c,h,cpp,hpp,cc,cxx,hxx}"
+  - "**/CMakeLists.txt"
+  - "**/CMakePresets.json"
+  - "**/vcpkg.json"
+  - "**/.clang-*"
+---
+
 # C/C++ lint & static analysis — STRICT level
 
 Shared tooling for both `rules/cpp/cpp-patterns.md` (C++) and

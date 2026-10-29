@@ -1,3 +1,9 @@
+---
+paths:
+  - "**/*.py"
+  - "**/pyproject.toml"
+---
+
 # Python rules
 
 See `rules/python/oop-idioms.md` for OOP-specific idioms (dataclasses,

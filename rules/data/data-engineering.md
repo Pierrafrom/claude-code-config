@@ -1,3 +1,9 @@
+---
+paths:
+  - "**/*.py"
+  - "**/*.ipynb"
+---
+
 # Data engineering Python — validation, pipelines, reproducibility
 
 Applies to Python data pipelines using Polars, pandas, or both.

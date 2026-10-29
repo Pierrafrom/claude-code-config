@@ -1,3 +1,9 @@
+---
+paths:
+  - "**/*.py"
+  - "**/pyproject.toml"
+---
+
 # Python lint — STRICT level
 
 ## Tool: ruff (linter + formatter, replaces flake8/black/isort/pyupgrade)

@@ -1,3 +1,10 @@
+---
+paths:
+  - "**/*.sql"
+  - "**/dbt_project.yml"
+  - "**/migrations/**"
+---
+
 # Database design — OLTP, OLAP/Kimball, Data Vault
 
 ## Routing — apply the right model for the workload

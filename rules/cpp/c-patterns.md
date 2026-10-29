@@ -1,3 +1,12 @@
+---
+paths:
+  - "**/*.{c,h,cpp,hpp,cc,cxx,hxx}"
+  - "**/CMakeLists.txt"
+  - "**/CMakePresets.json"
+  - "**/vcpkg.json"
+  - "**/.clang-*"
+---
+
 # C rules — style, memory discipline, C-specific idioms
 
 Scope: C has no classes, no inheritance, no exceptions, no RAII — the

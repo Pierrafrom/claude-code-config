@@ -1,3 +1,12 @@
+---
+paths:
+  - "**/Dockerfile*"
+  - "**/docker-compose*.y*ml"
+  - "**/.github/**"
+  - "**/*.tf"
+  - "**/.gitlab-ci.yml"
+---
+
 # DevOps — CI/CD, Docker, IaC, observability, security
 
 ## Routing — apply by project context

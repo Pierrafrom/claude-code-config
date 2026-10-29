@@ -1,3 +1,12 @@
+---
+paths:
+  - "**/*.{ts,tsx,js,jsx,mjs,cjs}"
+  - "**/package.json"
+  - "**/tsconfig*.json"
+  - "**/biome.json"
+  - "**/eslint.config.*"
+---
+
 # TypeScript/JavaScript architecture and error handling
 
 Concrete JS/TS instantiation of `rules/common/oop-design.md` — same

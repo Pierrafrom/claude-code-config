@@ -1,3 +1,12 @@
+---
+paths:
+  - "**/*.{ts,tsx,js,jsx,mjs,cjs}"
+  - "**/package.json"
+  - "**/tsconfig*.json"
+  - "**/biome.json"
+  - "**/eslint.config.*"
+---
+
 # TypeScript/JavaScript rules
 
 See `rules/typescript/typing-strict.md` for the strict-typing baseline and

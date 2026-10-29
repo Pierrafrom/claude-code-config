@@ -1,3 +1,10 @@
+---
+paths:
+  - "**/*.py"
+  - "**/*.ipynb"
+  - "**/dvc.yaml"
+---
+
 # Data science / MLOps — project structure
 
 See `rules/common/project-architectures.md` for the governing rule.

@@ -1,3 +1,10 @@
+---
+paths:
+  - "**/*.sln"
+  - "**/*.vcxproj"
+  - "**/*.resx"
+---
+
 # MSVC / Visual Studio native profile — C++/CLI, WinForms, COM
 
 Companion to `rules/cpp/build-architecture.md`'s "Toolchain routing"

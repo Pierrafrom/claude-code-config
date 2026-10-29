@@ -1,3 +1,12 @@
+---
+paths:
+  - "**/*.{c,h,cpp,hpp,cc,cxx,hxx}"
+  - "**/CMakeLists.txt"
+  - "**/CMakePresets.json"
+  - "**/vcpkg.json"
+  - "**/.clang-*"
+---
+
 # C++ rules — style, memory, error handling
 
 Scope: modern C++ (target C++20 by default, see `rules/cpp/lint-strict.md`
