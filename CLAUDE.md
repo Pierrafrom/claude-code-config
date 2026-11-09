@@ -22,13 +22,20 @@ software engineering.
   `uv sync` / `uv run`, never a bare `pip install` (exception: standalone
   one-off script without `pyproject.toml`).
 
+- **Two environments**: WSL2/Fish for code and practical work; native
+  Windows/PowerShell for course notes (LaTeX via Docker, OneDrive folder
+  `GI05/`). Rules in `rules/common/shell-windows.md`.
+
 ## Rules layout
 
-`rules/common/*` is always loaded. Language/domain rules (`python/`,
-`typescript/`, `cpp/`, `data/`, `devops/`, `frontend/`) carry a `paths:`
-frontmatter and load only when a matching file is read. When starting a
-project from scratch (no file read yet), read the relevant rule files
-explicitly.
+Always loaded from `rules/common/`: `coding-style`, `config-standards`,
+`doc-lookup`, `documentation`, `modern-cli-tools`, `reasoning-planning-routing`,
+`rule-freshness`, `shell-fish`, `shell-windows`. All other rules (`logging`,
+`oop-design`, `project-architectures`, `repo-structure`, and the `python/`,
+`typescript/`, `cpp/`, `data/`, `devops/`, `frontend/` folders) carry a
+`paths:` frontmatter and load only when a matching file is read. When
+starting a project from scratch (no file read yet), read the relevant rule
+files explicitly.
 
 ## Rigor level: UNCOMPROMISING
 
