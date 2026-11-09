@@ -23,18 +23,20 @@ through an explicit index (source: docs.astral.sh/uv/guides/integration/pytorch/
 
 ```toml
 [tool.uv.sources]
-torch = [{ index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" }]
-torchvision = [{ index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" }]
+torch = [{ index = "pytorch-cu130", marker = "sys_platform == 'linux' or sys_platform == 'win32'" }]
+torchvision = [{ index = "pytorch-cu130", marker = "sys_platform == 'linux' or sys_platform == 'win32'" }]
 
 [[tool.uv.index]]
-name = "pytorch-cu128"
-url = "https://download.pytorch.org/whl/cu128"
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
 explicit = true  # only packages that opt in use this index
 ```
 
 - `explicit = true` is mandatory: without it every package resolves against the PyTorch index.
-- The `cu128` suffix is an example — take the current CUDA tag from pytorch.org/get-started/locally before generating a config (see freshness note below).
-- Verify after `uv sync`: `uv run python -c "import torch; print(torch.__version__, torch.cuda.is_available())"` — the version should carry the local suffix (`+cu128`). No suffix = the sources table is missing or misspelled.
+- `cu130` is the newest CUDA index in the uv guide (others: `cu126`, `cu128`, `rocm7.2`, `xpu`, `cpu`). Since PyTorch 2.11 the default Linux PyPI wheels already target CUDA 13.0, so the explicit index matters most for Windows, an older driver, or a CPU-only/ROCm build. Pick the tag your driver supports (`nvidia-smi` shows the max CUDA version).
+- `uv pip install torch --torch-backend=auto` (or `UV_TORCH_BACKEND=auto`) auto-detects the build, but only in the `uv pip` interface — not usable from `pyproject.toml`; keep the index pattern above for projects.
+- Latest PyTorch requires Python 3.11+.
+- Verify after `uv sync`: `uv run python -c "import torch; print(torch.__version__, torch.cuda.is_available())"` — the version should carry the local suffix (`+cu130`). No suffix = the sources table is missing or misspelled.
 - Libraries published to PyPI declare plain `torch` and let users pick their build; the index pinning above is for applications.
 - WSL2: GPU comes from the Windows driver — never install a Linux NVIDIA driver inside WSL.
 

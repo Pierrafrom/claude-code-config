@@ -118,9 +118,12 @@ read the source code once the logs have pinpointed the problem area.
 
 ## Token & context management
 
-- **Default model: Sonnet.** Switch manually to a stronger model for complex
-  multi-file debugging, architecture decisions, or after a first failed
-  attempt on a hard task. Switch back down afterward.
+- **Model, effort and routing**: the default model lives in
+  `settings.json`, not here. Per-task routing (subagent `model`/`effort`
+  frontmatter, `opusplan`, the advisor tool, effort levels) and the
+  third-party tools evaluated and rejected (claude-mem, free-LLM routers)
+  are in `rules/common/claude-code-tooling.md` — read it before changing
+  model settings or adding a plugin.
 - **Sequential-thinking (MCP)**: invoke explicitly (no reliable auto-trigger,
   like any MCP) for tasks suited to it — debugging a bug spanning multiple
   files, comparing architecture options, planning a non-trivial refactor.

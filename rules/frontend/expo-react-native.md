@@ -70,7 +70,8 @@ before applying a pinned version below to a real project.
 
 - **v4** = Tailwind CSS 3.x + babel preset + Metro wrapper; stable.
   **v5** = Tailwind 4 (PostCSS plugin, plain `babel-preset-expo`) and was
-  still a release candidate as of 2026-10 — don't migrate before stable,
+  still a release candidate as of 2026-11-09 (`5.0.0-rc.1`, 2026-11-02, no
+  stable date announced; npm `latest` is still v4) — don't migrate before stable,
   and avoid UI kits that require v5 until then. Never mix v4 and v5
   setup instructions.
 - shadcn/ui is web-only; on native, build components in-house (tokens in

@@ -28,11 +28,16 @@ running in parallel as a full duplicate setup.
 
 ### Current gap (check this periodically, it's actively closing)
 
-As of mid-2026: Biome has type-aware linting, but not the deepest
-cross-file generic resolution the full TypeScript language service does;
-and Biome's rules-of-hooks coverage doesn't yet match the full
-`eslint-plugin-react-hooks` v6/v7 rule set. For a React project, ESLint
-is still the safer default for those two rule families specifically.
+As of 2026-11-09 (re-checked): Biome covers the two core hooks rules
+(`useHookAtTopLevel` ≈ `rules-of-hooks`, `useExhaustiveDependencies` ≈
+`exhaustive-deps`), so those alone no longer justify ESLint. Two gaps
+remain: the React Compiler-derived rules that moved into
+`eslint-plugin-react-hooks` v6+, and part of `typescript-eslint`'s
+type-aware set (Biome's type inference is narrower than the TypeScript
+compiler; secondary sources estimate roughly 75–85% coverage). For a React
+project using the React Compiler, or one relying on deep type-aware rules,
+keep the thin ESLint layer below; otherwise Biome alone is acceptable.
+Sources: biomejs.dev/linter/javascript/sources/, github.com/biomejs/biome/discussions/5290.
 
 ### Hybrid pattern — Biome as the primary tool, ESLint as a thin add-on
 
@@ -44,8 +49,9 @@ Biome doesn't cover yet:
 // eslint.config.js
 // Thin ESLint layer on top of Biome — NOT a full duplicate setup.
 // Biome (biome.json) stays the primary lint+format tool; this file only
-// loads the rule families Biome doesn't fully cover yet (mid-2026):
-// eslint-plugin-react-hooks and deep type-aware @typescript-eslint rules.
+// loads the rule families Biome doesn't fully cover yet (as of 2026-11):
+// eslint-plugin-react-hooks' React Compiler rules and deep type-aware
+// @typescript-eslint rules.
 // Re-check rules/typescript/lint-strict.md's "current gap" note before
 // assuming this is still needed — Biome is actively closing it.
 import tseslint from "typescript-eslint";
