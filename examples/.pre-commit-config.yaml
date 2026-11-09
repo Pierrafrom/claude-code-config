@@ -29,6 +29,13 @@ repos:
         pass_filenames: false
         types: [python]
 
+  # ML/DL projects with notebooks only (see rules/python/deep-learning.md):
+  # strips notebook outputs so diffs stay clean and no data leaks into git.
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.0.0  # placeholder — run `pre-commit autoupdate`
+    hooks:
+      - id: nbstripout
+
   # C/C++ projects only (see rules/cpp/lint-strict.md) — drop the block
   # above if the project has no Python, drop this one if it has no C/C++.
   - repo: https://github.com/pre-commit/mirrors-clang-format

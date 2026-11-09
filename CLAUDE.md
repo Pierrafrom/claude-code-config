@@ -66,6 +66,7 @@ Domain-specific rule files (load by project context — routing logic is in each
 - SQL / dbt / data warehouse style → `rules/data/sql-dbt.md`
 - Python data engineering (Polars/pandas, Pandera, pipeline structure) → `rules/data/data-engineering.md`
 - Database design (OLTP/3NF, Kimball/star schema, Data Vault, SCD) → `rules/data/db-design.md`
+- Machine learning / deep learning training code (PyTorch + uv CUDA indexes, seeds/determinism, experiment configs, ML tests, notebooks, how to drive GPU jobs) → `rules/python/deep-learning.md`
 - MLOps / LLMOps / RAG pipelines → `rules/data/mlops-rag.md`
 - Transactional PostgreSQL patterns (idempotency, ledger, locking, backups) → `rules/data/postgres-oltp-patterns.md`
 - DevOps (CI/CD, Docker, GitOps/IaC, observability, DevSecOps) → `rules/devops/devops.md`; background jobs/queues → `rules/devops/queues-and-workers.md`

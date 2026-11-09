@@ -7,5 +7,6 @@
 *.ico binary
 *.pdf binary
 
+*.ipynb linguist-documentation
 *.lock linguist-generated=true
 *.jsonl linguist-generated=true

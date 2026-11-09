@@ -15,6 +15,20 @@ build/
 .coverage
 htmlcov/
 
+# ML/DL projects only (see rules/python/deep-learning.md) — delete this
+# block if the project trains no models.
+data/
+mlruns/
+wandb/
+lightning_logs/
+outputs/
+.ipynb_checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+
 # C/C++ projects only (see rules/cpp/build-architecture.md) — delete this
 # block if the project has no C/C++.
 build-sanitized/

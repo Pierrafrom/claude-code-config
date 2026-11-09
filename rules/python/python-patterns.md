@@ -10,7 +10,8 @@ See `rules/python/oop-idioms.md` for OOP-specific idioms (dataclasses,
 properties, ABC/Protocol, dunders, exceptions) and
 `rules/python/typing-strict.md` for the full mypy-strict typing baseline.
 This file covers general style, naming, data/ML conventions, tests, and
-environment management.
+environment management. Model training (PyTorch, GPU, seeds, experiment
+configs) is in `rules/python/deep-learning.md`.
 
 ## Style
 
