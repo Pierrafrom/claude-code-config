@@ -1,3 +1,14 @@
+---
+paths:
+  - "**/*.py"
+  - "**/*.ts"
+  - "**/*.tsx"
+  - "**/*.c"
+  - "**/*.cpp"
+  - "**/*.hpp"
+  - "**/*.h"
+---
+
 # Object-oriented design — principles to apply by default
 
 General-purpose design rules, language-agnostic. Favor an object-oriented

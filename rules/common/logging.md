@@ -1,3 +1,13 @@
+---
+paths:
+  - "**/*.py"
+  - "**/*.cpp"
+  - "**/*.cc"
+  - "**/*.hpp"
+  - "**/*.h"
+  - "**/logs/**"
+---
+
 # Logging — optimized for low-token AI debugging
 
 Principle: a log must let Claude diagnose an error by reading the MINIMUM

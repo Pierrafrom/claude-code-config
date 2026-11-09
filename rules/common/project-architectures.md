@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/pyproject.toml"
+  - "**/package.json"
+  - "**/CMakeLists.txt"
+  - "**/Dockerfile"
+---
+
 # Project architectures — directory trees by stack
 
 Companion to `rules/common/config-standards.md`: that file covers tool

@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/pyproject.toml"
+  - "**/package.json"
+  - "**/CMakeLists.txt"
+  - "**/Dockerfile"
+---
+
 # Repo structure — context & token optimization
 
 A poorly structured repo forces Claude to read/grep more files than
