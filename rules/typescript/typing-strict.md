@@ -1,10 +1,5 @@
 ---
-paths:
-  - "**/*.{ts,tsx,js,jsx,mjs,cjs}"
-  - "**/package.json"
-  - "**/tsconfig*.json"
-  - "**/biome.json"
-  - "**/eslint.config.*"
+paths: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.mjs", "**/*.cjs", "**/package.json", "**/tsconfig*.json", "**/biome.json", "**/eslint.config.js"]
 ---
 
 # TypeScript typing — STRICT level
@@ -57,6 +52,22 @@ official baseline, don't rewrite it" principle this file follows.
 - `skipLibCheck: true` speeds up compilation by skipping `.d.ts` checking
   in `node_modules` — fine for third-party noise, never a substitute for
   fixing type errors in your own declaration files.
+
+## Recent-TypeScript and monorepo gotchas
+
+- Declare `compilerOptions.types` explicitly (e.g. `["node"]` for an API,
+  `[]` or the test runner for libraries). Recent TypeScript majors stopped
+  auto-including every `@types/*` package; relying on the old implicit
+  behavior breaks on upgrade. Check the release notes of the pinned
+  version.
+- Side-effect imports of non-TS files (`import "./global.css"`) need an
+  ambient declaration (a `*.d.ts` with `declare module "*.css"`); newer
+  compilers check them.
+- Stay on the TypeScript version your framework template validates (Expo,
+  Next.js) even when a newer major exists on npm.
+- Cross-workspace type-only imports use `import type` (enforced by
+  `consistent-type-imports`/`verbatimModuleSyntax`), so server-only
+  modules never enter a client bundle.
 
 ## `any` is mandatory to avoid — it propagates
 

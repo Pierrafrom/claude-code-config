@@ -1,10 +1,5 @@
 ---
-paths:
-  - "**/Dockerfile*"
-  - "**/docker-compose*.y*ml"
-  - "**/.github/**"
-  - "**/*.tf"
-  - "**/.gitlab-ci.yml"
+paths: ["**/Dockerfile*", "**/docker-compose*.yml", "**/docker-compose*.yaml", "**/.github/workflows/**", "**/*.tf", "**/*.tfvars", "**/k8s/**", "**/*.gitlab-ci.yml"]
 ---
 
 # DevOps — CI/CD, Docker, IaC, observability, security
@@ -42,6 +37,8 @@ paths:
   - Scan every built image for vulnerabilities before pushing to a registry
   - Scan IaC templates (Terraform, CloudFormation) for overly permissive IAM or unencrypted buckets
 - Fail the pipeline if test coverage drops below the defined threshold or if critical vulnerabilities are found.
+- **JS/TS pipelines (pnpm)**: install with `--frozen-lockfile`, cache the pnpm store via `actions/setup-node`'s `cache: pnpm`, add a `concurrency` group with `cancel-in-progress`, set `permissions: contents: read` by default, and test on the pinned Node version plus the next target LTS. Template: `examples/ci-ts-pnpm.yml`.
+- Background workers and queues (BullMQ/Valkey): `rules/devops/queues-and-workers.md`. Application-level API security: `rules/common/security-web-api.md`.
 
 ## GitOps and Infrastructure as Code
 

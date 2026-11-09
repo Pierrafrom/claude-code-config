@@ -1,0 +1,9 @@
+# Base: pnpm.io/pnpm-workspace_yaml. Expo + Metro: hoisted is the conservative
+# choice; isolated installs are supported since Expo SDK 54 — verify before switching.
+# See rules/frontend/expo-react-native.md. Pair with a .nvmrc (e.g. "24") and the
+# "packageManager" field in the root package.json.
+packages:
+  - apps/*
+  - packages/*
+
+nodeLinker: hoisted

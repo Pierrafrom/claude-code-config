@@ -1,10 +1,5 @@
 ---
-paths:
-  - "**/*.{ts,tsx,js,jsx,mjs,cjs}"
-  - "**/package.json"
-  - "**/tsconfig*.json"
-  - "**/biome.json"
-  - "**/eslint.config.*"
+paths: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.mjs", "**/*.cjs", "**/package.json", "**/tsconfig*.json", "**/biome.json", "**/eslint.config.js"]
 ---
 
 # TypeScript/JavaScript architecture and error handling

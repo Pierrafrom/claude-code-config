@@ -1,9 +1,5 @@
 ---
-paths:
-  - "**/*.{tsx,jsx,css}"
-  - "**/next.config.*"
-  - "**/turbo.json"
-  - "**/components.json"
+paths: ["**/*.ts", "**/*.tsx", "**/*.jsx", "**/*.css", "**/*.scss", "**/package.json", "**/next.config.*", "**/tailwind.config.*", "**/turbo.json", "**/components.json"]
 ---
 
 # Next.js App Router — project structure

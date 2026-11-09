@@ -1,9 +1,5 @@
 ---
-paths:
-  - "**/*.{tsx,jsx,css}"
-  - "**/next.config.*"
-  - "**/turbo.json"
-  - "**/components.json"
+paths: ["**/*.ts", "**/*.tsx", "**/*.jsx", "**/*.css", "**/*.scss", "**/package.json", "**/next.config.*", "**/tailwind.config.*", "**/turbo.json", "**/components.json"]
 ---
 
 # Frontend design skill routing
@@ -47,6 +43,16 @@ inconsistent output across a codebase. Decide by surface type:
   don't reach for the specialists before there's a brief to react to.
 - **Slides, internal docs, quick landing page needing consistent tokens
   fast, no full design-system investment justified** → `theme-factory`.
+
+## React Native / Expo (native + web from one codebase)
+
+`shadcn` and the web-only skills (`vercel-react-best-practices` Next.js
+parts, `web-design-guidelines`) assume the DOM. For an Expo app, styling
+is NativeWind plus in-house components (see
+`rules/frontend/expo-react-native.md`); the visual-direction rule above
+still applies (one direction skill per project), and game-like surfaces
+(cards, collections) lean on `impeccable` product mode or
+`emil-design-eng` for motion. `accesslint` only audits the web build.
 
 ## Always-on, regardless of visual direction
 

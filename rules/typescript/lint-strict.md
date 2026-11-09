@@ -1,10 +1,5 @@
 ---
-paths:
-  - "**/*.{ts,tsx,js,jsx,mjs,cjs}"
-  - "**/package.json"
-  - "**/tsconfig*.json"
-  - "**/biome.json"
-  - "**/eslint.config.*"
+paths: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.mjs", "**/*.cjs", "**/package.json", "**/tsconfig*.json", "**/biome.json", "**/eslint.config.js"]
 ---
 
 # TypeScript/JavaScript lint — STRICT level
@@ -211,6 +206,16 @@ export default defineConfig([
   // "react-hooks/exhaustive-deps": "warn"
 ]);
 ```
+
+## React Native / Expo projects
+
+Use `eslint-config-expo` (the official Expo flat config) as the base for
+the app workspace, then layer `typescript-eslint` strict presets as above;
+Biome stays the formatter. The React Native/hooks rule families are
+exactly the ESLint-only gap described above, so an Expo app is a
+"ESLint thin layer + Biome" or "ESLint + Prettier" project, never
+Biome-only. Verify the config shape against the installed Expo SDK
+(`docs.expo.dev/guides/using-eslint`) — it changed across SDK releases.
 
 ## Formatting mechanics (Biome or Prettier — pick one, automate it)
 

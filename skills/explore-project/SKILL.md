@@ -122,7 +122,8 @@ integration tests, error handling, reproducibility.
 End with a simple question: "Which of these directions interests you most to
 go further?" — and if the user chooses, chain directly into a deeper
 exploration of that direction (specs, breakdown, prototyping) rather than
-leaving the result hanging.
+leaving the result hanging. For a direction large enough to need a spec,
+offer to chain into the `spec-new` skill.
 
 ## Guardrails
 

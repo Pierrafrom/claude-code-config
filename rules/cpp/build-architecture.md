@@ -1,10 +1,5 @@
 ---
-paths:
-  - "**/*.{c,h,cpp,hpp,cc,cxx,hxx}"
-  - "**/CMakeLists.txt"
-  - "**/CMakePresets.json"
-  - "**/vcpkg.json"
-  - "**/.clang-*"
+paths: ["**/*.c", "**/*.h", "**/*.cc", "**/*.cpp", "**/*.hpp", "**/*.hh", "**/CMakeLists.txt", "**/CMakePresets.json", "**/vcpkg.json", "**/.clang-tidy", "**/.clang-format"]
 ---
 
 # C/C++ build & project structure — CMake, vcpkg, sanitizers, tests

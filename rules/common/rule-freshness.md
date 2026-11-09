@@ -25,7 +25,11 @@ signal**:
   framework-specific directory tree like
   `rules/frontend/nextjs-architecture.md`).
 - A named fast-moving ecosystem in general, even without an explicit date
-  — frontend tooling, LLM/RAG practices, cloud/DevOps tooling.
+  — frontend tooling, LLM/RAG practices, cloud/DevOps tooling, and in
+  particular Expo/React Native + NativeWind
+  (`rules/frontend/expo-react-native.md`), Drizzle
+  (`rules/typescript/orm-drizzle.md`), Hono, BullMQ, and Better Auth
+  (`rules/common/auth-patterns.md`).
 
 ## Procedure — before applying a flagged rule to a real task
 

@@ -50,6 +50,12 @@ Need to think before acting or building...
 │   a trade-off to weigh) — no need for user sign-off on a full plan
 │   → sequential-thinking (MCP), inline, no mode change
 │
+├── New project, or a large / ambiguous / hard-to-reverse feature whose
+│   requirements aren't settled yet
+│   → spec-new first (interview, writes docs/specs/…/spec.md), then plan
+│     mode per piece of implementation — see
+│     rules/common/spec-driven-development.md for the size tiers
+│
 ├── Non-trivial implementation ahead: new feature, refactor, multiple
 │   valid approaches, unclear scope, architectural choice
 │   → EnterPlanMode (default) — explore, design, present for approval;

@@ -1,0 +1,36 @@
+# GitHub Actions CI for a pnpm TypeScript monorepo. Copy to .github/workflows/ci.yml.
+# Pin every third-party action by commit SHA before use (rules/devops/devops.md);
+# the version tags below are placeholders for readability.
+# Mobile (EAS) build/submit steps are intentionally absent: add them from the
+# EAS docs for your project rather than from memory.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [24]   # add the next target LTS to catch upgrade breakage early
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4   # reads the version from package.json "packageManager"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
