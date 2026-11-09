@@ -44,7 +44,15 @@ le nom de repo : ex. "Algorithmique avancée" → `algorithmique-avancee`.
 
 ## Step 2 — Localiser/créer le repo de cours
 
-Chaque matière est son propre repo Git : `~/Code/cours-<matiere-slug>/`.
+**Mode "sur place" (prioritaire)** : si le répertoire courant (ou son
+sous-dossier `Summaries/`) contient déjà `main.tex` + `cours-preamble.sty`,
+le scaffold existe — ne rien créer, ne pas `git init`, travailler dans ce
+dossier (cas des cours Windows/OneDrive `GI05/<cours>/Summaries/`, sans git
+par design : voir `rules/common/shell-windows.md`). Les slides sont lus
+depuis `../Slides/`. Passer directement à l'étape 3.
+
+**Mode "repo dédié"** : sinon, chaque matière est son propre repo Git :
+`~/Code/cours-<matiere-slug>/`.
 
 S'il n'existe pas encore :
 1. `mkdir -p ~/Code/cours-<matiere-slug>/{chapitres,images}` et `git init`.
