@@ -1,6 +1,5 @@
 {
   "env": {
-    "MAX_THINKING_TOKENS": "10000",
     "CLAUDE_CODE_SUBAGENT_MODEL": "haiku"
   },
   "permissions": {
@@ -56,8 +55,32 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/check-em-dash.sh\""
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -d logs ]; then echo \"[Reminder] A command failed and this project has logs/: filter logs/*.jsonl on level ERROR before rereading code.\" >&2; exit 2; fi"
+          }
+        ]
+      }
     ]
   },
+  "model": "opus",
+  "effortLevel": "medium",
   "tui": "fullscreen",
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
