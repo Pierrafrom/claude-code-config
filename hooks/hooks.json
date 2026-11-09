@@ -12,6 +12,15 @@
     ],
     "PostToolUse": [
       {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/check-em-dash.sh\""
+          }
+        ]
+      },
+      {
         "matcher": "tool == \"Bash\" && tool_output.exit_code != 0",
         "hooks": [
           {
