@@ -1,3 +1,10 @@
+---
+paths:
+  - "**/*.py"
+  - "**/*.ipynb"
+  - "**/pyproject.toml"
+---
+
 # Machine learning / deep learning (PyTorch) — project rules
 
 Applies to Python projects that train or run ML/DL models. General Python
