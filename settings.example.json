@@ -79,11 +79,13 @@
       }
     ]
   },
-  "model": "opus",
+  "model": "sonnet",
+  "advisorModel": "opus",
   "effortLevel": "medium",
   "tui": "fullscreen",
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
     "impeccable@impeccable": true,
     "ui-ux-pro-max@ui-ux-pro-max-skill": true,
     "accesslint@accesslint": true,

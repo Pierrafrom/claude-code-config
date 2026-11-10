@@ -22,7 +22,10 @@ most targeted:
 
 - **Main model** (`model` in `settings.json`, `/model`). Sonnet covers most
   coding at lower cost; Opus for hard reasoning. The user's choice in
-  settings wins; do not change it unasked.
+  settings wins; do not change it unasked. **Current choice (2026-11-10):
+  Sonnet main + Opus advisor** (`"model": "sonnet"`, `"advisorModel": "opus"`)
+  — Opus is consulted only at decision points. `/model opus` for a session
+  that needs Opus throughout.
 - **Effort** (`effortLevel` in settings, `/effort`, `effort` in agent
   frontmatter): `low`/`medium`/`high`/`xhigh`/`max`. 5.5 models default to
   `medium`. Raise effort before switching model for a one-off hard task.
@@ -71,7 +74,7 @@ Built-in auto memory (on by default, `~/.claude/projects/<project>/memory/`,
 
 | Tool | Verdict | Why |
 |---|---|---|
-| `claude-code-setup` (anthropics/claude-plugins-official) | **Adopt, run per project** | Official, read-only: analyzes a repo and recommends 1–2 MCP servers/skills/hooks/subagents per category. Install `/plugin install claude-code-setup@claude-plugins-official`, then ask "recommend automations for this project". Apply its suggestions selectively against these rules. |
+| `claude-code-setup` (anthropics/claude-plugins-official) | **Adopted (installed 2026-11-10)** | Official, read-only: analyzes a repo and recommends 1–2 MCP servers/skills/hooks/subagents per category. One skill (`claude-automation-recommender`, ~140 tokens always-on). In a project, ask "recommend automations for this project". Apply its suggestions selectively against these rules. |
 | `claude-mem` (thedotmack) | **Reject** | Duplicates built-in auto memory (its installer offers to disable it), installs Bun + uv + a background worker, anonymous telemetry on by default, its observer agent costs tokens on your plan or a paid service, and its README promotes an unrelated crypto token. Revisit only if auto memory proves insufficient on a long project. |
 | Free LLM APIs via claude-code-router / OpenRouter / Gemini free tier | **Reject for Claude Code** | Swaps Claude for weaker open models with small context and low daily caps (OpenRouter free: ~50 req/day); free tiers may train on submitted code; routing real Claude traffic through a proxy to dodge billing is a ToS risk. Acceptable for **app-level** LLM calls inside a project (prototyping a LangChain/RAG pipeline), with no confidential data. |
 | Third-party model routers (CCR, routing hooks) | **Reject** | Native routing above (subagent models, effort, `opusplan`, advisor) covers the need without a proxy in the request path. |
@@ -83,6 +86,10 @@ Prefer a CLI over an MCP server when both exist (`gh` over the GitHub MCP,
 built-in Read/Write over a filesystem MCP) — official cost guidance. MCP
 tool definitions are deferred by default, so an idle server costs little,
 but an unused one is still attack surface: disable it with `/mcp`.
+
+Current state (2026-11-10): the filesystem MCP was removed (redundant with
+built-in tools). The GitHub MCP is kept on purpose (the user's choice; the
+permission allow-list uses its PR tools) — don't propose removing it again.
 
 ## Sources to watch (as of 2026-11-09)
 
